@@ -1,8 +1,5 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
-import sys
-import os
-
 __location__ = os.path.realpath(
     os.path.join(
         os.getcwd(),
@@ -12,40 +9,44 @@ __location__ = os.path.realpath(
     )
 )
 
-#picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'assets')
-picdir = __location__ + "/assets"
-
+import os
 import logging
-import driver.epd7in5_V2 as epd7in5_V2
 import time
-from PIL import Image,ImageDraw,ImageFont
-import traceback
 
+import driver.epd7in5_V2 as epd7in5_V2
+
+from PIL import Image,ImageDraw,ImageFont
+
+
+picdir = __location__ + "/assets"
 logging.basicConfig(level=logging.DEBUG)
 
+
 try:
-    logging.info("epd7in5_V2 Demo")
+    logging.info("epd7in5_V2 Test")
     epd = epd7in5_V2.EPD()
-    
-    logging.info("init and Clear")
+
+    logging.info("Cnitialize and Clear")
     epd.init()
     epd.Clear()
 
-    logging.info("3.read bmp file")
+    logging.info("Read '7in5_V2.bmp image")
     Himage = Image.open(os.path.join(picdir, '7in5_V2.bmp'))
+
+    logging.info ("Display image")
     epd.display(epd.getbuffer(Himage))
     time.sleep(2)
 
-    logging.info("Clear...")
+    logging.info("Clear display")
     epd.init()
     epd.Clear()
 
-    logging.info("Goto Sleep...")
+    logging.info("Set display to sleep")
     epd.sleep()
-    
+
 except IOError as e:
     logging.info(e)
-    
+
 except KeyboardInterrupt:    
     logging.info("ctrl + c:")
     epd7in5_V2.epdconfig.module_exit()

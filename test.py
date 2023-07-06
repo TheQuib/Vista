@@ -12,8 +12,8 @@ __location__ = os.path.realpath(
     )
 )
 
-picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'assets')
-
+#picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'assets')
+picdir = __location__ + "\\assets"
 
 import logging
 import driver.epd7in5_V2 as epd7in5_V2

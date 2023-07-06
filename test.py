@@ -16,7 +16,7 @@ picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__)
 
 
 import logging
-import driver.epd7in5
+import driver.epd7in5 as epd7in5_V2
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback

@@ -1,14 +1,5 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
-__location__ = os.path.realpath(
-    os.path.join(
-        os.getcwd(),
-        os.path.dirname(
-            __file__
-        )
-    )
-)
-
 import os
 import logging
 import time
@@ -17,6 +8,14 @@ import driver.epd7in5_V2 as epd7in5_V2
 
 from PIL import Image,ImageDraw,ImageFont
 
+__location__ = os.path.realpath(
+    os.path.join(
+        os.getcwd(),
+        os.path.dirname(
+            __file__
+        )
+    )
+)
 
 picdir = __location__ + "/assets"
 logging.basicConfig(level=logging.DEBUG)

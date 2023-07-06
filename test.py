@@ -26,7 +26,7 @@ try:
     logging.info("epd7in5_V2 Test")
     epd = epd7in5_V2.EPD()
 
-    logging.info("Cnitialize and Clear")
+    logging.info("Initialize and Clear")
     epd.init()
     epd.Clear()
 

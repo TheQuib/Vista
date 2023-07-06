@@ -15,6 +15,13 @@ python3 -m pip install --upgrade pip
 python3 -m pip install epd-library
 ```
 
+### Check to make sure `spi` is enabled
+```bash
+cat /boot/config.txt | grep spi
+# Should return:
+# dtparam=spi=on
+```
+
 ### Configurations
  - Enable SPI interface
    - Enter `sudo raspi-config`

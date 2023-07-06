@@ -1,8 +1,30 @@
-#!/usr/bin/python3
-# Clears 7.5" waveshare e-paper display
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+# Clears the display
 
 import logging
-import epd7in5
 
-epd7in5.POWER_ON
-epd7in5.DISPLAY_REFRESH
+import driver.epd7in5_V2 as epd7in5_V2
+
+logging.basicConfig(level=logging.DEBUG)
+
+
+try:
+    logging.info("epd7in5_V2 Test")
+    epd = epd7in5_V2.EPD()
+
+    logging.info("Initialize and Clear")
+    epd.init()
+    epd.Clear()
+    
+    logging.info("Set display to sleep")
+    epd.sleep()
+
+
+except IOError as e:
+    logging.info(e)
+
+except KeyboardInterrupt:    
+    logging.info("ctrl + c:")
+    epd7in5_V2.epdconfig.module_exit()
+    exit()

@@ -3,7 +3,7 @@ Scrapes data from the HughesNet usage page and displays to a Waveshare 7.5" e-in
 
 # Requirements
  - Raspberry Pi Zero, 3, 4
- - Waveshare 7.5" e-ink display
+ - Waveshare 7.5" e-ink display (V2)
 
 # Setup
 ## Raspberry Pi

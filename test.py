@@ -3,11 +3,19 @@
 import sys
 import os
 
+__location__ = os.path.realpath(
+    os.path.join(
+        os.getcwd(),
+        os.path.dirname(
+            __file__
+        )
+    )
+)
 
 picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'assets')
 
-
-libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'driver')
+libdir = __location__ + "\\driver"
+#libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'driver')
 if os.path.exists(libdir):
     sys.path.append(libdir)
 

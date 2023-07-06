@@ -14,14 +14,9 @@ __location__ = os.path.realpath(
 
 picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'assets')
 
-libdir = __location__ + "\\driver"
-print(libdir)
-#libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'driver')
-if os.path.exists(libdir):
-    sys.path.append(libdir)
 
 import logging
-from driver import epd7in5_V2
+from .driver import epd7in5_V2
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback

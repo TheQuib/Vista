@@ -10,7 +10,8 @@ Scrapes data from the HughesNet usage page and displays to a Waveshare 7.5" e-in
 ### Install prerequisites:
 ```bash
 sudo apt update
-sudo apt install python3 python3-pip python3-pil python3-numpy
+sudo apt install python3 python3-pip python3-numpy libopenjp2-7-dev
+python3 -m pip install Pillow
 ```
 
 ### Check to make sure `spi` is enabled

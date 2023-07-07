@@ -11,8 +11,6 @@ Scrapes data from the HughesNet usage page and displays to a Waveshare 7.5" e-in
 ```bash
 sudo apt update
 sudo apt install python3 python3-pip python3-pil python3-numpy
-python3 -m pip install --upgrade pip
-python3 -m pip install epd-library
 ```
 
 ### Check to make sure `spi` is enabled

@@ -35,3 +35,4 @@ cat /boot/config.txt | grep spi
  - [[Waveshare] 7.5inch e-Paper HAT Manual](https://www.waveshare.com/wiki/7.5inch_e-Paper_HAT)
    - [Working with Raspberry Pi](https://www.waveshare.com/wiki/7.5inch_e-Paper_HAT_Manual#Working_With_Raspberry_Pi)
  - [[Waveshare] Raspberry Pi Guides for SPI e-Paper](https://www.waveshare.com/wiki/Template:Raspberry_Pi_Guides_for_SPI_e-Paper)
+ - [[Waveshare - Github] Repository with examples](https://github.com/waveshare/e-Paper)

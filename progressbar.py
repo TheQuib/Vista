@@ -36,7 +36,9 @@ def draw_progress_bar(x, y, image_width, image_height, bar_width, bar_height, pr
     filled_coords = [(x + padding, y + padding), (x + filled_width + padding, y + bar_height - padding - 1)]
     draw.rounded_rectangle(filled_coords, radius=(bar_height - 2 * padding) // 2, fill=bar_fill_color)
 
-    # Show the progress bar
+    image.transpose(Image.ROTATE_180)
+
+    # Return image
     return(image)
 
 try:

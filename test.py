@@ -31,14 +31,12 @@ try:
 
     logging.info("Read '7in5_V2.bmp image")
     Himage = Image.open(os.path.join(picdir, '7in5_V2.bmp'))
+    # Rotate the image upside-down
+    Himage = Himage.transpose(Image.ROTATE_180)
 
     logging.info ("Display image")
     epd.display(epd.getbuffer(Himage))
     time.sleep(2)
-
-    logging.info("Clear display")
-    epd.init()
-    epd.Clear()
 
     logging.info("Set display to sleep")
     epd.sleep()

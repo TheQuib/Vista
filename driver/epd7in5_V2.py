@@ -1,12 +1,12 @@
 # *****************************************************************************
-# * | File        :	  epd7in5.py
+# * | File        :	  epd7in5_V2.py
 # * | Author      :   Waveshare team
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
 # * | This version:   V4.0
 # * | Date        :   2019-06-20
-# # | Info        :   python demo
+# # | Info        :   
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal

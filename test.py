@@ -29,10 +29,8 @@ try:
     epd.init()
     epd.Clear()
 
-    logging.info("Read '7in5_V2.bmp image")
-    Himage = Image.open(os.path.join(picdir, '7in5_V2.bmp'))
-    # Rotate the image upside-down
-    Himage = Himage.transpose(Image.ROTATE_180)
+    logging.info("Read image")
+    Himage = Image.open(os.path.join(picdir, 'penguin.bmp'))
 
     logging.info ("Display image")
     epd.display(epd.getbuffer(Himage))

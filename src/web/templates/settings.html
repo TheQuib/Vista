@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Frame Settings</h2>
+    <p>Customize your frame settings below.</p>
+
+    <form id="settings-form">
+        <div class="form-group">
+            <label for="brightness">Brightness:</label>
+            <input type="range" id="brightness" name="brightness" min="0" max="100" value="50">
+        </div>
+
+        <div class="form-group">
+            <label for="contrast">Contrast:</label>
+            <input type="range" id="contrast" name="contrast" min="0" max="100" value="50">
+        </div>
+
+        <div class="form-group">
+            <label for="rotation">Rotation:</label>
+            <input type="range" id="rotation" name="rotation" min="0" max="360" value="0">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Settings</button>
+    </form>
+</div>
+{% endblock %}

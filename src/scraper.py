@@ -1,21 +1,51 @@
-import requests
+import time
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
-#from inky import InkyPHAT
 
-# Send a web request to the web interface
-url = 'http://192.168.0.1'
-page = requests.get(url)
+options = Options()
+options.add_argument('-headless')
+driver = webdriver.Firefox(options=options)
 
-# Parse the HTML response
-parser = BeautifulSoup(page.content, 'html.parser')
+driver.get('http://192.168.0.1')
 
-divs = parser.findAll('div', attrs={'class':'col-md-6'})
+time.sleep(5)
 
-print(divs)
+data = driver.page_source
 
-# Display data on the e-ink display
-#inky_display = InkyPHAT('red')
-#inky_display.set_border(inky_display.WHITE)
-#for row in rows:
-#    inky_display.text((0, 0), row.get_text(), inky_display.RED)
-#    inky_display.show()
+driver.quit()
+
+#print(data)
+
+parser = BeautifulSoup(data, 'html.parser')
+
+# Find all divs with the class "text-center copyright_grey"
+divs = parser.find_all('div', {'class': 'text-center copyright_grey'})
+
+# List to hold the numbers
+numbers = []
+
+# For each div, get the text within it
+for div in divs:
+    text = ' '.join(div.stripped_strings)
+    parts = text.split()  # split the text into parts
+    number = parts[0]  # the first part is the number (as a string)
+    numbers.append(number)  # add the number to the list
+
+# Access the numbers
+planTotal = numbers[0]
+planRemaining = numbers[1]
+bonusTotal = numbers[2]
+bonusRemaining = numbers[3]
+
+# Calculate percentages
+planPercentRemaining = f"{float(planRemaining)/float(planTotal):.2%}"
+bonusPercentRemaining = f"{float(bonusRemaining)/float(bonusTotal):.2%}"
+
+print("Total in plan: " + planTotal)
+print("Remaining in plan: " + planRemaining )
+print("Plan percent left: " + planPercentRemaining + "\n")
+
+print("Total in bonus: " + bonusTotal)
+print("Remaining in bonus: " + bonusRemaining)
+print("Bonus percent left: " + bonusPercentRemaining + "\n")

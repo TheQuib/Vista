@@ -2,50 +2,74 @@ import time
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
+import logging
 
-options = Options()
-options.add_argument('-headless')
-driver = webdriver.Firefox(options=options)
+class GetHtml:
+    def load_website():
+        options = Options()
+        options.add_argument('-headless')
+        driver = webdriver.Firefox(options=options)
+        logging.debug("Set web driver")
 
-driver.get('http://192.168.0.1')
+        logging.debug("Load web page")
+        driver.get('http://192.168.0.1')
 
-time.sleep(5)
+        logging.debug("Waiting for 5 seconds to make sure all scripts are run")
+        time.sleep(5)
 
-data = driver.page_source
+        logging.debug("Setting html variable")
+        html = driver.page_source
 
-driver.quit()
+        logging.debug("Exiting driver")
+        driver.quit()
 
-#print(data)
+        return html
 
-parser = BeautifulSoup(data, 'html.parser')
+        # Print data for debugging purposes
+        #print(data)
 
-# Find all divs with the class "text-center copyright_grey"
-divs = parser.find_all('div', {'class': 'text-center copyright_grey'})
+    def parse_website(html):
+        parser = BeautifulSoup(html, 'html.parser')
 
-# List to hold the numbers
-numbers = []
+        logging.debug("Getting divs")
+        divs = parser.find_all('div', {'class': 'text-center copyright_grey'})
 
-# For each div, get the text within it
-for div in divs:
-    text = ' '.join(div.stripped_strings)
-    parts = text.split()  # split the text into parts
-    number = parts[0]  # the first part is the number (as a string)
-    numbers.append(number)  # add the number to the list
+        logging.debug("Create list for number storage")
+        numbers = []
 
-# Access the numbers
-planTotal = numbers[0]
-planRemaining = numbers[1]
-bonusTotal = numbers[2]
-bonusRemaining = numbers[3]
+        logging.debug("Splitting text from divs")
+        for div in divs:
+            text = ' '.join(div.stripped_strings)
+            parts = text.split()
+            number = parts[0]
+            numbers.append(number)
 
-# Calculate percentages
-planPercentRemaining = f"{float(planRemaining)/float(planTotal):.2%}"
-bonusPercentRemaining = f"{float(bonusRemaining)/float(bonusTotal):.2%}"
+        logging.debug("Accessing numbers")
+        planTotal = numbers[0]
+        planRemaining = numbers[1]
+        bonusTotal = numbers[2]
+        bonusRemaining = numbers[3]
 
-print("Total in plan: " + planTotal)
-print("Remaining in plan: " + planRemaining )
-print("Plan percent left: " + planPercentRemaining + "\n")
+        logging.debug("Calculating percentages")
+        planPercentRemaining = f"{float(planRemaining)/float(planTotal):.2%}"
+        bonusPercentRemaining = f"{float(bonusRemaining)/float(bonusTotal):.2%}"
 
-print("Total in bonus: " + bonusTotal)
-print("Remaining in bonus: " + bonusRemaining)
-print("Bonus percent left: " + bonusPercentRemaining + "\n")
+        logging.debug("Returning list of values")
+        values = {'planTotal': planTotal,
+                  'planRemaining': planRemaining,
+                  'planPercentageRemaining': planPercentRemaining,
+                  'bonusTotal': bonusTotal,
+                  'bonusRemaining': bonusRemaining,
+                  'bonusPercentRemaining': bonusPercentRemaining
+                }
+
+        return values
+
+        # Print all values for deb
+        #print("Total in plan: " + planTotal)
+        #print("Remaining in plan: " + planRemaining )
+        #print("Plan percent left: " + planPercentRemaining + "\n")
+
+        #print("Total in bonus: " + bonusTotal)
+        #print("Remaining in bonus: " + bonusRemaining)
+        #print("Bonus percent left: " + bonusPercentRemaining + "\n")

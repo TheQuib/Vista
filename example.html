@@ -1,0 +1,383 @@
+<html ng-app="homeApp" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/icon" href="hughesnet-favicon.ico">
+    
+    <meta charset="utf-8">
+    
+    <!-- Bower JavaScript -->
+    <link rel="stylesheet" href="/bower_components/css/bower.min.css">
+    
+    <!-- Bower CSS -->
+    <script src="/bower_components/js/bower.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hns.min.css">
+    
+    <!-- Custom JS -->
+    <script src="/js/angular-shared.min.js"></script>
+    <script src="/js/filters/localeNumber.js"></script>
+    <script src="/js/routes/homeRoutes.js"></script>
+    <script src="/js/controllers/home/homeControllers.js"></script>
+    
+    </head>
+    
+    <body ng-controller="customerHomeController" class="ng-scope">
+    <div ng-hide="blocked">
+    
+    <title class="ng-binding">HT2000W HughesNet System Control Center </title>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+    
+            <div class="navbar-header">
+              <button class="navbar-toggle" type="button" ng-click="hamburgerCollapsed = !hamburgerCollapsed;">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+    
+            <!-- Everything in this div will collapse when the browser or device is small -->
+            <div collapse="hamburgerCollapsed" class="navbar-collapse navbar-collapse-center bs-js-navbar-collapse collapse" style="height: 0px;">
+            <ul class="nav navbar-nav navbar-center">
+                <li>
+                    <a ng-click="route('/home/status')" tooltip-placement="bottom" data-container="body" data-tooltip-html-unsafe="A <b><span style=&quot;color:red;&quot;>red</span></b> indicator means the system has a problem. <br><br> A <b><span style=&quot;color:orange;&quot;>orange</span></b> indicator means the system is in FAP condition. <br><br> A <b><span style=&quot;color:gold;&quot;>yellow</span></b> indicator means the system is operational in a degraded condition. <br><br> A <b><span style=&quot;color:lime;&quot;>green</span></b> indicator means that all functions are operating within normal parameters." style="cursor: pointer;" class="ng-binding"><i class="fa fa-square led_green"></i> System Status</a>
+                </li>
+                <li>
+                    <a ng-click="route('/home/information')" tooltip-placement="bottom" tooltip="A general information screen that identifies software version, customer ID number and other important information." style="cursor: pointer;" class="ng-binding"><i class="fa fa-square led_green"></i> System Information</a>
+                </li>
+                <li class="dropdown" on-toggle="toggled(open)" dropdown="" ng-show="language_locale!='N/A'">
+                    <a href="" class="dropdown-toggle ng-binding" dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"></span> English <i class="fa fa-caret-down"></i></a>
+    
+                    <ul class="dropdown-menu">
+                        <!-- ngRepeat: language in languages --><li ng-repeat="language in languages" class="ng-scope">
+                            <a href="" ng-click="$parent.select(language)" class="ng-binding"><span class="flag-icon flag-icon-us"></span> English </a>
+                        </li><!-- end ngRepeat: language in languages --><li ng-repeat="language in languages" class="ng-scope">      
+                            <a href="" ng-click="$parent.select(language)" class="ng-binding"><span class="flag-icon flag-icon-br"></span> Português </a>
+                        </li><!-- end ngRepeat: language in languages --><li ng-repeat="language in languages" class="ng-scope">      
+                            <a href="" ng-click="$parent.select(language)" class="ng-binding"><span class="flag-icon flag-icon-co"></span> Español </a>
+                        </li><!-- end ngRepeat: language in languages -->
+                    </ul>
+                </li>
+                <li>
+                    <a href="limited.html"><i class="fa fa-info-circle fa-lg adv-icon"></i></a>
+                </li>
+            </ul>
+            </div>
+    
+        </div> <!-- container -->
+    </nav>
+    
+    <div class="container top-buffer">
+    
+    <div class="row">
+    <div class="col-md-3">
+    
+        <!-- Left Panel -->
+        <div class="panel panel-hns">
+            <div class="panel-body">
+    
+                <!-- Logo -->
+                <div class="row">
+                <div class="col-md-12">
+                    <a href="/#/"><img class="img-responsive img-center" src="/dyn_http/nsp_logo.gif"></a>
+                    <hr>
+                </div>
+                </div>
+                <!-- End Logo -->
+    
+                <!-- Links -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div vertical="true" type="pills" class="ng-isolate-scope">
+      <ul class="nav nav-pills nav-stacked" ng-class="{'nav-stacked': vertical, 'nav-justified': justified}" ng-transclude="">        
+                            <li ng-class="{active: active, disabled: disabled}" ng-click="route('/home')" active="sidebar_active.home" class="ng-scope ng-isolate-scope active">
+      <a href="" ng-click="select()" tab-heading-transclude="" class="ng-binding"><tab-heading class="ng-binding ng-scope"><i class="fa fa-chevron-circle-right"></i> Home</tab-heading></a>
+    </li>
+                            <li ng-class="{active: active, disabled: disabled}" ng-click="route('/home/connectivity')" active="sidebar_active.connectivity" class="ng-scope ng-isolate-scope">
+      <a href="" ng-click="select()" tab-heading-transclude="" class="ng-binding"><tab-heading class="ng-binding ng-scope"><i class="fa fa-chevron-circle-right"></i> Connectivity Test</tab-heading></a>
+    </li>
+                            <li ng-class="{active: active, disabled: disabled}" ng-click="route('/home/bist')" active="sidebar_active.bist" class="ng-scope ng-isolate-scope">
+      <a href="" ng-click="select()" tab-heading-transclude="" class="ng-binding"><tab-heading class="ng-binding ng-scope"><i class="fa fa-chevron-circle-right"></i> Built-In Self Test</tab-heading></a>
+    </li>
+                            <li ng-class="{active: active, disabled: disabled}" ng-click="link('http://'+nsp_links[0].link_url+'?ESN='+suffix)" ng-show="installed &amp;&amp; nsp_links[0].link_url &amp;&amp; !nsp_links[0].link_name" class="ng-scope ng-isolate-scope ng-hide">
+      <a href="" ng-click="select()" tab-heading-transclude="" class="ng-binding"><tab-heading class="ng-binding ng-scope"><i class="fa fa-chevron-circle-right"></i> Service Activation</tab-heading></a>
+    </li>
+                            <li ng-class="{active: active, disabled: disabled}" ng-click="link('http://'+nsp_links[0].link_url+'?ESN='+suffix)" ng-show="installed &amp;&amp; nsp_links[0].link_url &amp;&amp; nsp_links[0].link_name" class="ng-scope ng-isolate-scope ng-hide">
+      <a href="" ng-click="select()" tab-heading-transclude="" class="ng-binding"><tab-heading class="ng-scope"><i class="fa fa-chevron-circle-right ng-binding" ng-bind-html="toTrustedHTML('&nbsp;' + nsp_links[0].link_name)">&nbsp;</i></tab-heading></a>
+    </li>
+                            <li ng-class="{active: active, disabled: disabled}" ng-click="route('/home/led')" ng-show="led_settings" active="sidebar_active.led" class="ng-scope ng-isolate-scope ng-hide">
+      <a href="" ng-click="select()" tab-heading-transclude="" class="ng-binding"><tab-heading class="ng-binding ng-scope"><i class="fa fa-chevron-circle-right"></i> Front Panel Brightness</tab-heading></a>
+    </li>
+                            <li ng-class="{active: active, disabled: disabled}" ng-click="link('http://'+wifiLANAddr)" ng-show="wifi" class="ng-scope ng-isolate-scope">
+      <a href="" ng-click="select()" tab-heading-transclude="" class="ng-binding"><tab-heading class="ng-binding ng-scope"><i class="fa fa-chevron-circle-right"></i> WiFi Settings</tab-heading></a>
+    </li>
+                            <li ng-class="{active: active, disabled: disabled}" ng-click="link('/install.html')" ng-show="!installed" class="ng-scope ng-isolate-scope ng-hide">
+      <a href="" ng-click="select()" tab-heading-transclude="" class="ng-binding"><tab-heading class="ng-binding ng-scope"><i class="fa fa-chevron-circle-right"></i> Install</tab-heading></a>
+    </li>
+                        </ul>
+      <div class="tab-content">
+        <!-- ngRepeat: tab in tabs --><div class="tab-pane ng-scope active" ng-repeat="tab in tabs" ng-class="{active: tab.active}" tab-content-transclude="tab">
+        </div><!-- end ngRepeat: tab in tabs --><div class="tab-pane ng-scope" ng-repeat="tab in tabs" ng-class="{active: tab.active}" tab-content-transclude="tab">
+        </div><!-- end ngRepeat: tab in tabs --><div class="tab-pane ng-scope" ng-repeat="tab in tabs" ng-class="{active: tab.active}" tab-content-transclude="tab">
+        </div><!-- end ngRepeat: tab in tabs --><div class="tab-pane ng-scope" ng-repeat="tab in tabs" ng-class="{active: tab.active}" tab-content-transclude="tab">
+        </div><!-- end ngRepeat: tab in tabs --><div class="tab-pane ng-scope" ng-repeat="tab in tabs" ng-class="{active: tab.active}" tab-content-transclude="tab">
+        </div><!-- end ngRepeat: tab in tabs --><div class="tab-pane ng-scope" ng-repeat="tab in tabs" ng-class="{active: tab.active}" tab-content-transclude="tab">
+        </div><!-- end ngRepeat: tab in tabs --><div class="tab-pane ng-scope" ng-repeat="tab in tabs" ng-class="{active: tab.active}" tab-content-transclude="tab">
+        </div><!-- end ngRepeat: tab in tabs --><div class="tab-pane ng-scope" ng-repeat="tab in tabs" ng-class="{active: tab.active}" tab-content-transclude="tab">
+        </div><!-- end ngRepeat: tab in tabs -->
+      </div>
+    </div>
+                    </div>
+                </div>
+                <!-- End Links -->
+    
+            </div>
+        </div>
+        <!-- End Left Panel -->
+    
+    </div>
+    
+    <div class="col-md-9">
+    
+        <!-- Info Box -->
+        <div class="panel panel-hns">
+            <div class="panel-body">
+                <div class="col-md-4 hnsText ng-binding">
+                    SAN: DSS201704440
+                </div>
+                <div class="col-md-3 hnsText ng-binding">
+                    ESN: 12261068
+                </div>
+                <div class="col-md-5 hnsText ng-binding">
+                    System State Code :
+                    <span tooltip="Fully operational" tooltip-placement="bottom" ng-class="{red: sc.severity == 'error', orange: sc.severity == 'marginal', green: sc.severity == 'no_error'}" class="green">
+                        <b class="ng-binding">0.0.0</b>
+                    </span>
+                </div>
+            </div>
+        </div> <!-- End Panel -->
+        <!-- End Info Box -->
+    
+    
+    <!-- Angular View -->
+    <!-- ngView: --><div ng-view="" class="ng-scope"><div class="row ng-scope">
+    <div class="col-md-12">
+    
+    <div class="scc_header ng-binding">HT2000W
+        <span class="hns_blue ng-binding">System Control Center</span>
+    </div>
+    <div class="ng-binding">Your built-in diagnostic system for viewing performance statistics, getting help and configuring settings.</div>
+    <hr>
+    
+    <div class="row">
+        <div ng-class="{'col-md-4':displayDataTable, 'col-md-12':!displayDataTable}" ng-show="help_panel !== undefined" class="col-md-4">
+            <!-- ngInclude: --><ng-include src="'views/home/help_panel.html'" class="ng-scope"><div class="row ng-scope">
+        <div class="col-md-12">
+            <div class="panel panel-info panel-hns">
+                <div class="panel-heading"><strong class="ng-binding">HELP</strong></div>
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <!-- ngRepeat: link in help_panel.links --><li ng-repeat="link in help_panel.links" class="ng-scope">
+                            <!-- ngIf: link.url != '' --><a target="_blank" ng-if="link.url != ''" href="http://myhughesnet.hughesnet.com/" class="ng-binding ng-scope">Welcome to HughesNet</a><!-- end ngIf: link.url != '' -->
+                            <!-- ngIf: link.url == '' -->
+                        </li><!-- end ngRepeat: link in help_panel.links --><li ng-repeat="link in help_panel.links" class="ng-scope">
+                            <!-- ngIf: link.url != '' --><a target="_blank" ng-if="link.url != ''" href="https://shop.hughesnet.com/" class="ng-binding ng-scope">Shop Optional Services</a><!-- end ngIf: link.url != '' -->
+                            <!-- ngIf: link.url == '' -->
+                        </li><!-- end ngRepeat: link in help_panel.links --><li ng-repeat="link in help_panel.links" class="ng-scope">
+                            <!-- ngIf: link.url != '' --><a target="_blank" ng-if="link.url != ''" href="http://my.hughesnet.com/support" class="ng-binding ng-scope">Search Support Articles</a><!-- end ngIf: link.url != '' -->
+                            <!-- ngIf: link.url == '' -->
+                        </li><!-- end ngRepeat: link in help_panel.links --><li ng-repeat="link in help_panel.links" class="ng-scope">
+                            <!-- ngIf: link.url != '' --><a target="_blank" ng-if="link.url != ''" href="https://community.hughesnet.com/" class="ng-binding ng-scope">Visit the Community</a><!-- end ngIf: link.url != '' -->
+                            <!-- ngIf: link.url == '' -->
+                        </li><!-- end ngRepeat: link in help_panel.links -->
+                    </ul>
+                </div><!-- End Panel Body-->
+            </div><!-- End Panel -->
+    
+        </div><!-- End col 4 -->
+    </div></ng-include></div><!-- End col 4 -->
+        <div ng-class="{'col-md-12':help_panel===undefined, 'col-md-8':help_panel!==undefined}" ng-show="installed &amp;&amp; associated &amp;&amp; !assoc_status.walled_garden &amp;&amp; displayDataTable" class="col-md-8">
+            <div class="panel panel-info panel-hns">
+                <div class="panel-heading panel-heading-small text-center">
+                    <strong class="ng-binding">Usage Status</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                    <div class="col-md-6">
+    
+                        <div class="text-center anytime_green">
+                            <strong><h4 class="ng-binding">Service Plan Data</h4></strong>
+                        </div>
+    
+                        <div class="chart-container"><canvas class="chart chart-doughnut ng-isolate-scope" data="anytime.data" labels="d_labels" options="d_options" colours="anytime.colors" style="width: 247px; height: 123px;" width="247" height="123"></canvas></div>
+                        <div class="donut-inner text-center anytime_green">
+                            <h5 class="ng-binding">70%</h5>
+                            <span ng-hide="anytime.unlimited" class="ng-binding">remaining</span>
+                            <span ng-show="anytime.unlimited" class="ng-binding ng-hide">unlimited</span>
+                        </div>
+    
+                        <div class="text-center copyright_grey" ng-hide="anytime.unlimited">
+                            <span>
+                                <span class="big ng-binding">30.0</span>
+                                <span class="ng-binding">GB</span>
+                                <span class="ng-binding">in your plan</span>
+                            </span>
+                        </div>
+                        <div class="text-center copyright_grey" ng-hide="anytime.unlimited">
+                            <span>
+                                <span class="big ng-binding">21.1</span>
+                                <span class="ng-binding">GB</span>
+                                <span class="ng-binding">remaining</span>
+                            </span>
+                        </div>
+                        <div class="text-center copyright_grey ng-hide" ng-hide="anytime.unlimited || ((bonus.overage == 0) &amp;&amp; (anytime.overage == 0))">
+                            <span>
+                                <span class="big ng-binding">0.0</span>
+                                <span class="ng-binding">MB</span>
+                                <span class="ng-binding">overage</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+    
+                        <div class="text-center bonus_byte_blue">
+                            <strong><h4 class="ng-binding">Bonus Zone</h4></strong>
+                        </div>
+    
+                        <div class="chart-container"><canvas class="chart chart-doughnut ng-isolate-scope" data="bonus.data" labels="d_labels" options="d_options" colours="bonus.colors" style="width: 247px; height: 123px;" width="247" height="123"></canvas></div> 
+                        <div class="donut-inner text-center bonus_byte_blue">
+                            <h5 class="ng-binding">98%</h5>
+                            <span ng-hide="bonus.unlimited" class="ng-binding">remaining</span>
+                            <span ng-show="bonus.unlimited" class="ng-binding ng-hide">unlimited</span>
+                        </div>
+                        <div class="text-center copyright_grey" ng-hide="bonus.unlimited">
+                            <span>
+                                <span class="big ng-binding">50.0</span>
+                                <span class="ng-binding">GB</span>
+                                <span class="ng-binding">in your plan</span>
+                            </span>
+                        </div>
+                        <div class="text-center copyright_grey" ng-hide="bonus.unlimited">
+                            <span>
+                                <span class="big ng-binding">48.9</span>
+                                <span class="ng-binding">GB</span>
+                                <span class="ng-binding">remaining</span>
+                            </span>
+                        </div>
+                        <div class="text-center copyright_grey ng-hide" ng-hide="anytime.unlimited || ((bonus.overage == 0) &amp;&amp; (anytime.overage == 0))">
+                            <span>
+                                <span class="big ng-binding">0.0</span>
+                                <span class="ng-binding">MB</span>
+                                <span class="ng-binding">overage</span>
+                            </span>
+                        </div>
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center copyright_grey">
+                                <h5><b class="ng-binding">Allowance Resets</b></h5>
+                                <span class="ng-binding">8 days/2 hrs/21 mins</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center copyright_grey">
+                            <span>
+                                <h5><b class="ng-binding">Data Tokens</b></h5>
+                                <span class="big ng-binding">0.0</span>
+                                <span class="ng-binding">MB</span>
+                                <span class="ng-binding">remaining</span>
+                            </span>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="text-center copyright_grey">
+                                <h5><b class="ng-binding">Bonus Period Starts</b></h5>
+                                <span class="ng-binding">4 hrs/21 mins</span>
+                        </div>
+                    </div>
+                    </div>
+                </div><!-- End Usage Panel Body-->
+            </div><!-- End Usage Panel -->
+        </div><!-- End col 8-->
+        <div ng-class="{'col-md-12':help_panel===undefined, 'col-md-8':help_panel!==undefined}" ng-show="!installed" class="ng-hide col-md-8">
+            <div class="panel panel-danger panel-hns">
+                <div class="panel-heading panel-heading-small text-center"><i class="fa fa-warning"></i> <strong class="ng-binding">Your System is Not Quite Ready</strong></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="ng-binding">Once your installer has activated your modem, you will be able to complete your Service Activation and go online.</p>
+                            <p class="ng-binding">If you are replacing an existing satellite modem, please wait while your new modem completes activation.</p>
+                        </div>
+                   </div>
+                </div><!-- End Usage Panel Body-->
+            </div><!-- End Usage Panel -->
+        </div><!-- End col 8-->
+        <div ng-class="{'col-md-12':help_panel===undefined, 'col-md-8':help_panel!==undefined}" ng-show="installed &amp;&amp; !associated &amp;&amp; displayDataTable" class="ng-hide col-md-8">
+            <div class="panel panel-info panel-hns">
+                <div class="panel-heading panel-heading-small text-center">
+                    <strong class="ng-binding">Usage Status</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center copyright_grey">
+                            <strong class="ng-binding">Not Available - Not Associated</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Usage Panel Body-->
+            </div><!-- End Usage Panel -->
+        </div><!-- End col 8-->
+        <div ng-class="{'col-md-12':help_panel===undefined, 'col-md-8':help_panel!==undefined}" ng-show="associated &amp;&amp; assoc_status.walled_garden &amp;&amp; installed &amp;&amp; displayDataTable" class="ng-hide col-md-8">
+            <div class="panel panel-info panel-hns">
+                <div class="panel-heading panel-heading-small text-center">
+                    <strong class="ng-binding">Usage Status</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center copyright_grey">
+                            <strong class="ng-binding">Not Available - Walled Garden Mode</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Usage Panel Body-->
+            </div><!-- End Usage Panel -->
+        </div><!-- End col 8-->
+    
+    </div><!-- End Row -->
+    
+    </div><!-- End Col12 -->
+    </div><!-- End Row -->
+    </div>
+    
+    </div> <!-- End Column 9-->
+    
+    </div> <!-- End World Row-->
+    </div> <!-- End Container-->
+    
+    </div> <!-- End Blocked-->
+    
+    <div ng-show="blocked" class="ng-hide">
+    <div class="container top-buffer">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-hns">
+                <div class="panel-body">
+                    <span class="col-md-12 hnsText ng-binding"><i class="fa fa-warning"></i> LUI access not authorized</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <p class="footer copyright_grey ng-binding" align="center">©2022 HUGHES</p>
+    
+    
+    
+    </body></html>

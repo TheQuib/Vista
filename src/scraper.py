@@ -4,7 +4,7 @@ from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
 import logging
 
-class GetHtml:
+class GetHTML:
     def load_website():
         options = Options()
         options.add_argument('-headless')

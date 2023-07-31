@@ -3,7 +3,7 @@
 import os
 import logging
 
-import driver.epd7in5_V2 as epd7in5_V2
+import epd7in5_V2
 
 from PIL import Image,ImageDraw,ImageFont
 
@@ -19,7 +19,7 @@ __location__ = os.path.realpath(
 picdir = __location__ + "/assets"
 logging.basicConfig(level=logging.DEBUG)
 
-class progressBar:
+class ProgressBar:
 
     def draw_progress_bar(progress, x, y, bar_width, bar_height, image_width, image_height, padding=4, background_color=(50, 50, 50), bar_fill_color=(150, 150, 150), border_color=(50, 50, 50), border_width=4):
         # Create a new image with the given image_width and image_height
@@ -66,7 +66,7 @@ try:
     epd.Clear()
 
     logging.info("Draw progress bar")
-    bar = progressBar.draw_progress_bar(55, 75, 50, 300, 40, epd.width, epd.height)
+    bar = ProgressBar.draw_progress_bar(55, 75, 50, 300, 40, epd.width, epd.height)
     epd.display(epd.getbuffer(bar))
 
     logging.info("Set display to sleep")

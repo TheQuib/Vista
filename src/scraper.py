@@ -50,17 +50,11 @@ class GetHTML:
         bonusTotal = numbers[2]
         bonusRemaining = numbers[3]
 
-        logging.debug("Calculating percentages")
-        planPercentRemaining = f"{float(planRemaining)/float(planTotal):.2%}"
-        bonusPercentRemaining = f"{float(bonusRemaining)/float(bonusTotal):.2%}"
-
         logging.debug("Returning list of values")
         values = {'planTotal': planTotal,
                   'planRemaining': planRemaining,
-                  'planPercentageRemaining': planPercentRemaining,
                   'bonusTotal': bonusTotal,
                   'bonusRemaining': bonusRemaining,
-                  'bonusPercentRemaining': bonusPercentRemaining
                 }
 
         return values

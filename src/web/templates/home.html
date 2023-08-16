@@ -1,18 +1,35 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Stats</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Hughesnet stats</h1>
+        <p>Current plan limits and data usage :)</p>
+        
+        <!-- Regular Plan Progress Bar -->
+        <div class="progress-bar regular">
+            <div class="progress" style="width: {{ regular_percentage }}%;"></div>
+        </div>
+        <div class="plan-info">
+            <span>Total: {{ regular_total }}</span>
+            <span>Total Used: {{ regular_used }}</span>
+        </div>
 
-{% block content %}
-<div class="container">
-    <h2>Welcome to Frame Control</h2>
-    <p>Use the buttons below to control your picture frame.</p>
-
-    <div class="button-section">
-        <button id="prev-btn" class="btn btn-primary">Previous</button>
-        <button id="next-btn" class="btn btn-primary">Next</button>
+        <!-- Bonus Plan Progress Bar -->
+        <div class="progress-bar bonus">
+            <div class="progress" style="width: {{ bonus_percentage }}%;"></div>
+        </div>
+        <div class="plan-info">
+            <span>Total: {{ bonus_total }}</span>
+            <span>Total Used: {{ bonus_used }}</span>
+        </div>
+        
+        <button class="action-button">Click Me!</button>
     </div>
-
-    <div class="button-section">
-        <button id="play-btn" class="btn btn-success">Play</button>
-        <button id="stop-btn" class="btn btn-danger">Stop</button>
-    </div>
-</div>
-{% endblock %}
+</body>
+</html>

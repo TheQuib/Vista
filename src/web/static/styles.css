@@ -83,22 +83,47 @@ p {
 
 /* Animations */
 
-.action-button {
-    padding: 15px 30px;
-    font-size: 18px;
-    background: #fff;
-    color: #333;
-    border: none;
-    border-radius: 50px;
+.refresh-button {
+    background-color: white; /* Green background */
+    border: solid;
+    border-color: white;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    animation: bounce 1s infinite;
-}
+    border-radius: 10px;
+    transition: background-color 0.3s; /* Smooth transition on hover */
+  }
+  
+  .refresh-button:hover {
+    background-color: rgba(0, 0, 0, 0); /* Slightly darker green on hover */
+    color: white;
+  }
 
-.action-button:hover {
-    transform: scale(1.05);
-    background: #f68084;
-}
+  .clearDisplay-button {
+    background-color: rgba(0, 0, 0, 0); /* Green background */
+    border: solid;
+    border-color: white;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s; /* Smooth transition on hover */
+  }
+  
+  .clearDisplay-button:hover {
+    background-color: white; /* Slightly darker green on hover */
+    color: black;
+  }  
 
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-20px); }

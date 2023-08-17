@@ -5,11 +5,12 @@ import os
 logging.basicConfig(level=logging.DEBUG)
 
 class Webserver:
-    def __init__(self):
+    def __init__(self, clear_display):
         current_directory = os.path.dirname(os.path.abspath(__file__))
         template_dir = os.path.join(current_directory, 'web', 'templates')
         static_dir = os.path.join(current_directory, 'web', 'static')
         self.app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
+        self.clear_display = clear_display
 
     def start_server(self, planTotal, planRemaining, bonusTotal, bonusRemaining):
         planTotal = float(planTotal)
@@ -31,5 +32,11 @@ class Webserver:
         @self.app.route('/settings')
         def settings():
             return render_template('settings.html')
+        
+        @self.app.route('/clear-display', methods=['POST'])
+        def clear_display_route():
+            result = self.clear_display()
+            return result
+            
 
         self.app.run()

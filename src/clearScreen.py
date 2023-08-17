@@ -4,7 +4,7 @@
 
 import logging
 
-import driver.epd7in5_V2 as epd7in5_V2
+from . import epd7in5_V2
 
 logging.basicConfig(level=logging.DEBUG)
 

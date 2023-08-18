@@ -38,31 +38,28 @@ p {
     position: fixed;
     top: 10px;
     right: 10px;
-    display: flex;
-    flex-direction: column; /* Stack the bars vertically */
-    align-items: flex-end;
-}
+    display: flex; /* Arrange the bars horizontally */
+  }
   
-.progress-container {
-margin-top: 30px;
-}
-
 .progress-bar {
-    height: 100px; /* Fixed height for vertical bars */
+    height: 200px; /* Adjust height as needed */
     width: 30px; /* Width for vertical bars */
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 15px;
-    margin-bottom: 15px; /* Space between the bars */
+    margin-left: 15px; /* Space between the bars */
     position: relative;
-    overflow: hidden; /* To make sure the progress doesn't spill outside the bar */
 }
 
 .progress {
-position: absolute;
-bottom: 0; /* Start filling from the bottom */
-width: 100%; /* Full width of the container */
-height: 0%; /* Set initial height, will be changed dynamically */
-background: linear-gradient(0deg, #f68084, #a6c0fe); /* 0deg makes the gradient vertical */
+    position: absolute;
+    bottom: 0; /* Start filling from the bottom */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width of the container */
+    height: 0%; /* Set initial height, will be changed dynamically */
+}
+
+.progress-container {
+    margin-top: 30px;
 }
 
 .label {

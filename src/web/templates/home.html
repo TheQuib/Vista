@@ -16,28 +16,16 @@
     </div>
 
     <div class="progress-bars">
-        <!-- Regular Plan -->
-        <div class="plan-info regular">
-          <span class="label">Regular Plan: {{ regular_used }} / {{ regular_total }}</span>
-          <div class="progress-container regular">
-            <div class="progress" style="width: {{ regular_percentage }}%;">
-              <span class="label">{{ regular_percentage }}%</span>
-            </div>
-          </div>
+        <div class="progress-bar regular">
+          <div class="progress" style="height:{{ regular_percentage }}%;"></div>
         </div>
+        <div class="progress-bar bonus">
+          <div class="progress" style="height:{{ bonus_percentage }}%;"></div>
+        </div>
+    </div>
       
-        <!-- Bonus Plan -->
-        <div class="plan-info bonus">
-          <span class="label">Bonus Plan: {{ bonus_used }} / {{ bonus_total }}</span>
-          <div class="progress-container bonus">
-            <div class="progress" style="width: {{ bonus_percentage }}%;">
-              <span class="label">{{ bonus_percentage }}%</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <script src="{{ url_for('static', filename='scripts.js') }}"></script> 
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script> 
 </body>
 </html>
 

@@ -15,23 +15,27 @@
         <button id="clearDisplay-button" class="clearDisplay-button">Clear Display</button>
     </div>
 
-    <!-- Regular Plan Progress Bar -->
-    <div class="progress-bars regular">
-        <div class="progress" style="width: {{ regular_percentage }}%;"></div>
-    </div>
-    <div class="plan-info">
-        <span>Total: {{ regular_total }}</span>
-        <span>Total Used: {{ regular_used }}</span>
-    </div>
-
-    <!-- Bonus Plan Progress Bar -->
-    <div class="progress-bars bonus">
-        <div class="progress" style="width: {{ bonus_percentage }}%;"></div>
-    </div>
-    <div class="plan-info">
-        <span>Total: {{ bonus_total }}</span>
-        <span>Total Used: {{ bonus_used }}</span>
-    </div>
+    <div class="progress-bars">
+        <!-- Regular Plan -->
+        <div class="plan-info regular">
+          <span class="label">Regular Plan: {{ regular_used }} / {{ regular_total }}</span>
+          <div class="progress-container regular">
+            <div class="progress" style="width: {{ regular_percentage }}%;">
+              <span class="label">{{ regular_percentage }}%</span>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Bonus Plan -->
+        <div class="plan-info bonus">
+          <span class="label">Bonus Plan: {{ bonus_used }} / {{ bonus_total }}</span>
+          <div class="progress-container bonus">
+            <div class="progress" style="width: {{ bonus_percentage }}%;">
+              <span class="label">{{ bonus_percentage }}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>
 

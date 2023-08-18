@@ -36,19 +36,8 @@
           </div>
         </div>
       </div>
+
+      <script src="{{ url_for('static', filename='scripts.js') }}"></script> 
 </body>
 </html>
 
-<script>
-    document.getElementById("clearDisplay-button").addEventListener("click", function() {
-      fetch('/clear-display', {
-        method: 'POST',
-      })
-      .then(response => response.text())
-      .then(data => {
-        console.log(data); // Log the response from the server
-        // You can update the UI here if needed
-      });
-    });
-</script>
-    

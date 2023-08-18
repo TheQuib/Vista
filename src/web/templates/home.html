@@ -11,33 +11,33 @@
         <h1>Hughesnet stats</h1>
         <p>Current plan limits and data usage :)</p>
         
-        <!-- Regular Plan Progress Bar -->
-        <div class="progress-bar regular">
-            <div class="progress" style="width: {{ regular_percentage }}%;"></div>
-        </div>
-        <div class="plan-info">
-            <span>Total: {{ regular_total }}</span>
-            <span>Total Used: {{ regular_used }}</span>
-        </div>
-
-        <!-- Bonus Plan Progress Bar -->
-        <div class="progress-bar bonus">
-            <div class="progress" style="width: {{ bonus_percentage }}%;"></div>
-        </div>
-        <div class="plan-info">
-            <span>Total: {{ bonus_total }}</span>
-            <span>Total Used: {{ bonus_used }}</span>
-        </div>
-        
         <button id="refresh-button" class="refresh-button">Refresh Display</button>
         <button id="clearDisplay-button" class="clearDisplay-button">Clear Display</button>
+    </div>
+
+    <!-- Regular Plan Progress Bar -->
+    <div class="progress-bars regular">
+        <div class="progress" style="width: {{ regular_percentage }}%;"></div>
+    </div>
+    <div class="plan-info">
+        <span>Total: {{ regular_total }}</span>
+        <span>Total Used: {{ regular_used }}</span>
+    </div>
+
+    <!-- Bonus Plan Progress Bar -->
+    <div class="progress-bars bonus">
+        <div class="progress" style="width: {{ bonus_percentage }}%;"></div>
+    </div>
+    <div class="plan-info">
+        <span>Total: {{ bonus_total }}</span>
+        <span>Total Used: {{ bonus_used }}</span>
     </div>
 </body>
 </html>
 
 <script>
     document.getElementById("clearDisplay-button").addEventListener("click", function() {
-      fetch('/clear_display', {
+      fetch('/clear-display', {
         method: 'POST',
       })
       .then(response => response.text())

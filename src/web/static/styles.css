@@ -63,7 +63,10 @@ p {
 
 .progress-container {
     margin-top: 30px;
+    display: flex; /* Use flexbox to align the text and bars */
+    align-items: center; /* Center them vertically */
 }
+
 
 .label {
     font-size: 12px;
@@ -73,10 +76,15 @@ p {
 
 .plan-info {
     display: flex;
+    flex-direction: column; /* Stack the labels vertically */
     justify-content: space-between;
     font-size: 12px;
-    margin-bottom: 15px;
+    margin-right: 10px; /* Add some space between the text and the bar */
     color: #fff;
+}
+
+.total, .used {
+    padding: 5px;
 }
 
 /* Updated colors for each plan */

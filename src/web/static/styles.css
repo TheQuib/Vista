@@ -64,7 +64,7 @@ p {
 .progress-container {
     margin-top: 30px;
     display: flex; /* Align the text and bars horizontally */
-    flex-direction: column; /* Stack them vertically */
+    flex-direction: row; /* Stack them vertically */
     position: absolute;
     top: 10px;
     right: 10px; /* Position the containers at the top-right corner of the page */
@@ -75,6 +75,12 @@ p {
     font-size: 12px;
     color: #fff;
     padding: 0 5px;
+}
+
+.plan-container {
+    display: flex; /* Align the text and bars vertically */
+    flex-direction: column; /* Stack them vertically */
+    margin-right: 15px; /* Add some space between each plan */
 }
 
 .plan-info {

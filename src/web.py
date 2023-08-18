@@ -39,4 +39,4 @@ class Webserver:
             return result
             
 
-        self.app.run()
+        self.app.run(host="0.0.0.0")

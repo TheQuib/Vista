@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from src.scraper import GetHTML
 #from src.progressbar import ProgressBar
-import src.clearScreen
+from src.screenControls import ScreenControls
 from src.web import Webserver
 import os, logging, time
 
@@ -22,7 +22,7 @@ def main(example):
         hughesnet_values = GetHTML.parse_website(html)
         #print(hughesnet_values)
     
-    web = Webserver(clear_display=src.clearScreen)
+    web = Webserver(clear_display=ScreenControls.clearScreen())
     web.start_server(hughesnet_values['planTotal'], hughesnet_values['planRemaining'], hughesnet_values['bonusTotal'], hughesnet_values['bonusRemaining'])
 
 

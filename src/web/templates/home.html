@@ -15,27 +15,27 @@
         <button id="clearDisplay-button" class="clearDisplay-button">Clear Display</button>
     </div>
 
-    <div class="progress-container regular">
-        <div class="plan-info">
-          <div class="total">Total: {{ regular_total }} GB</div>
-          <div class="used">Used: {{ regular_used }} GB</div>
-        </div>
-        <div class="progress-bar">
-          <div class="progress" style="height: {{ regular_percentage }}%;"></div>
-        </div>
-      </div>
-      
-      <div class="progress-container bonus">
-        <div class="plan-info">
-          <div class="total">Total: {{ bonus_total }} GB</div>
-          <div class="used">Used: {{ bonus_used }} GB</div>
-        </div>
-        <div class="progress-bar">
-          <div class="progress" style="height: {{ bonus_percentage }}%;"></div>
+    <div>
+        <div class="progress-container regular">
+            <div class="plan-info">
+              <div class="total">Total: {{ regular_total }} GB</div>
+              <div class="used">Used: {{ regular_used }} GB</div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" style="height: {{ regular_percentage }}%;"></div>
+            </div>
+          </div>
+          
+          <div class="progress-container bonus">
+            <div class="plan-info">
+              <div class="total">Total: {{ bonus_total }} GB</div>
+              <div class="used">Used: {{ bonus_used }} GB</div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" style="height: {{ bonus_percentage }}%;"></div>
+            </div>
         </div>
     </div>
-      
-      
 
     <script src="{{ url_for('static', filename='scripts.js') }}"></script> 
 </body>

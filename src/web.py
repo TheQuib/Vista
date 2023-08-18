@@ -35,8 +35,7 @@ class Webserver:
         
         @self.app.route('/clear-display', methods=['POST'])
         def clear_display_route():
-            result = self.clear_display()
-            return result
+            self.clear_display()
             
 
         self.app.run(host="0.0.0.0")

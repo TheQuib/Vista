@@ -34,6 +34,13 @@ p {
 
 /* Progress bars */
 
+.progress-section {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+}
+
 .progress-bars {
     position: fixed;
     top: 10px;
@@ -47,6 +54,7 @@ p {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 15px;
     position: relative;
+    overflow: hidden;
   }
 
 .progress {
@@ -60,7 +68,8 @@ p {
 
 .progress-container {
     margin-top: 30px;
-    width: 100px; /* Adjust as needed */
+    margin-right: 30px;
+    width: 30px; /* Adjust as needed */
     display: inline-block;
     vertical-align: top;
 }
@@ -162,3 +171,23 @@ p {
     40% { transform: translateY(-10px); }
     60% { transform: translateY(-5px); }
 }
+
+@media (max-width: 600px) {
+    .container {
+      max-width: 95%;
+    }
+    .progress-container {
+      width: 30px; /* Adjust as needed */
+      height: 100px;
+    }
+    .refresh-button, .clearDisplay-button {
+      font-size: 18px;
+      padding: 15px 30px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }

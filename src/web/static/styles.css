@@ -42,32 +42,27 @@ p {
   }
   
 .progress-bar {
-    height: 200px; /* Adjust height as needed */
-    width: 30px; /* Width for vertical bars */
+    width: 100%;
+    height: 300px; /* Adjust as needed */
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 15px;
-    margin-left: 15px; /* Space between the bars */
-    overflow: hidden;
     position: relative;
-}
+  }
 
 .progress {
     position: absolute;
-    bottom: 0; /* Start filling from the bottom */
-    left: 0; /* Align to the left */
-    width: 100%; /* Full width of the container */
-    height: 0%; /* Set initial height, will be changed dynamically */
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background: linear-gradient(0deg, #f68084, #a6c0fe);
-    border-radius: 15px 15px 0 0;
-}
+    border-radius: 0 0 15px 15px;
+  }
 
 .progress-container {
     margin-top: 30px;
-    display: flex; /* Align the text and bars horizontally */
-    flex-direction: row; /* Stack them vertically */
-    position: absolute;
-    top: 10px;
-    right: 10px; /* Position the containers at the top-right corner of the page */
+    width: 100px; /* Adjust as needed */
+    display: inline-block;
+    vertical-align: top;
 }
 
 
@@ -80,14 +75,16 @@ p {
 .plan-container {
     display: flex; /* Align the text and bars vertically */
     flex-direction: column; /* Stack them vertically */
-    margin-right: 15px; /* Add some space between each plan */
+    margin-left: 15px; /* Add some space between each plan */
 }
 
 .plan-info {
-    writing-mode: vertical-lr; /* Rotate the text vertically */
-    transform: rotate(180deg); /* Flip the text so it reads top-to-bottom */
-    margin-bottom: 10px; /* Add some space between the text and the bar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     font-size: 12px;
+    margin-bottom: 15px;
     color: #fff;
 }
 

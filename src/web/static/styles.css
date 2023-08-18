@@ -36,33 +36,32 @@ p {
 
 .progress-bars {
     position: fixed;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
-  }
+    display: flex; /* This will align the bars horizontally */
+}
   
 .progress-container {
 margin-top: 30px;
 }
 
 .progress-bar {
-width: 100%;
-background-color: rgba(255, 255, 255, 0.2);
-border-radius: 15px;
-margin-bottom: 15px;
-position: relative;
-height: 30px;
+    height: 100px; /* Fixed height for vertical bars */
+    width: 30px; /* Width for vertical bars */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    margin-left: 15px; /* Space between the bars */
+    position: relative;
+    display: flex;
+    align-items: flex-end; /* This makes the progress fill from the bottom */
 }
-
+  
 .progress {
 position: absolute;
-left: 0;
-top: 0;
-height: 100%;
-background: linear-gradient(90deg, #f68084, #a6c0fe);
+bottom: 0; /* Start filling from the bottom */
+width: 100%; /* Full width of the container */
 border-radius: 15px;
-display: flex;
-align-items: center;
-justify-content: center;
+background: linear-gradient(0deg, #f68084, #a6c0fe); /* 0deg makes the gradient vertical */
 }
 
 .label {

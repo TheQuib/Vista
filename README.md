@@ -1,5 +1,5 @@
-# hughesnet-usage-scraper
-Scrapes data from the HughesNet usage page and displays to a Waveshare 7.5" e-ink display (epd7in5)
+# SkyStat
+Scrapes data from the HughesNet usage page, displays on a Waveshare 7.5" e-ink display (epd7in5) and opens a web server for display management.
 
 # Requirements
  - Raspberry Pi Zero, 3, 4

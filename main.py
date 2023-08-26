@@ -36,6 +36,7 @@ def main(example):
     # Display progress bar on display
     dm = DisplayManager()
     dm.draw_progress_bar(planPercentRemaining, 75, 50, 300, 40)
+    dm.display_image()
 
     # Wait 1 minute (dev purposes)
     time.sleep(60)

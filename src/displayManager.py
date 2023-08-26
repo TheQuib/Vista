@@ -3,7 +3,7 @@
 import os
 import logging
 
-import epd7in5_V2
+from . import epd7in5_V2
 
 from PIL import Image,ImageDraw,ImageFont
 

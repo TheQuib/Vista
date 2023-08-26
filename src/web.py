@@ -12,6 +12,11 @@ class Webserver:
         self.app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
         self.clear_display = clear_display
 
+        self.should_run = True # Server control loop flag
+
+    def stop_server(self):
+        self.should_run = False
+
     def start_server(self, planTotal, planRemaining, bonusTotal, bonusRemaining):
         planTotal = float(planTotal)
         planRemaining = float(planRemaining)
@@ -26,7 +31,9 @@ class Webserver:
         bonusPercentageRemaining = round((bonusRemaining / bonusTotal) * 100, 2)  # Calculating percentage
 
         @self.app.route('/')
-        def home():            
+        def home():  
+            if not self.should_run:
+                request.environ.get('werkzeug.server.shutdown')()          
             return render_template('home.html', regular_total=planTotal, regular_used=planUsed, regular_percentage=planPercentageRemaining, bonus_total=bonusTotal, bonus_used=bonusUsed, bonus_percentage=bonusPercentageRemaining)
 
         @self.app.route('/settings')
@@ -38,4 +45,5 @@ class Webserver:
             self.clear_display()
             
 
-        self.app.run(host="0.0.0.0")
+        if self.should_run:
+            self.app.run(host="0.0.0.0", port=5000)

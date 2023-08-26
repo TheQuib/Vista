@@ -49,3 +49,24 @@ class DisplayManager:
         text_x = x
         text_y = y + bar_height
         self.draw.text((text_x, text_y), progress_text, font=font, fill=(0, 0, 0))
+
+    def display_image(self):
+        try:
+            logging.info("Initializing and clearing EPD")
+            epd = epd7in5_V2.EPD()
+            epd.init()
+            epd.Clear()
+
+            logging.info("Drawing image")
+            epd.display(epd.getbuffer(self.image))
+
+            logging.info("Set display to sleep")
+            epd.sleep()
+
+        except IOError as e:
+            logging.info(e)
+
+        except KeyboardInterrupt:    
+            logging.info("ctrl + c:")
+            epd7in5_V2.epdconfig.module_exit()
+            exit()

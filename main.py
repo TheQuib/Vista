@@ -30,7 +30,9 @@ def main(example):
     web_thread.start()
    
     # Calculate percentage
-    planPercentRemaining = round((hughesnet_values['planRemaining'] / hughesnet_values['planTotal']) * 100, 2)
+    planRemaining = float(hughesnet_values['planRemaining'])
+    planTotal = float(hughesnet_values['planTotal'])
+    planPercentRemaining = round((planRemaining / planTotal) * 100, 2)
     # Display progress bar on display
     dm = DisplayManager()
     dm.draw_progress_bar(planPercentRemaining, 75, 50, 300, 40)

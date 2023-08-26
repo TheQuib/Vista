@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from src.scraper import GetHTML
-#from src.progressbar import ProgressBar
+from src.displayManager import DisplayManager
 from src.screenControls import ScreenControls
 from src.web import Webserver
 import os, logging, time
@@ -24,6 +24,11 @@ def main(example):
     
     web = Webserver(clear_display=ScreenControls.clearScreen())
     web.start_server(hughesnet_values['planTotal'], hughesnet_values['planRemaining'], hughesnet_values['bonusTotal'], hughesnet_values['bonusRemaining'])
+
+    planPercentRemaining = round((hughesnet_values['planRemaining'] / hughesnet_values['planTotal']) * 100, 2)
+
+    dm = DisplayManager()
+    dm.draw_progress_bar(planPercentRemaining, 75, 50, 300, 40)
 
 
 main(useExampleHtml)

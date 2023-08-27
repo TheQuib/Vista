@@ -5,7 +5,16 @@ from src.screenControls import ScreenControls
 from src.web import Webserver
 from threading import Thread
 import os, logging, time
+import socket
 
+__location__ = os.path.realpath(
+    os.path.join(
+        os.getcwd(),
+        os.path.dirname(
+            __file__
+        )
+    )
+)
 
 useExampleHtml = True
 
@@ -31,13 +40,29 @@ def main(example):
     bonusTotal = float(hughesnet_values['bonusTotal'])
     bonusPercentRemaining = round((bonusRemaining / bonusTotal) * 100, 2)
 
+    # Get IP Address of device
+    hostname = socket.gethostname()
+    local_ip = socket.gethostbyname(hostname)
+    local_ip = str(local_ip)
+
     # Display progress bar on display
     dm = DisplayManager()
     dm.draw_text("SkyStat", 70, 15, 40)
     dm.draw_text("github.com/TheQuib/SkyStat", 70, 58, 17)
+    dm.draw_text("Manage this display...", 495, 445, 17)
+    dm.draw_qr_code(655, 375, 100, local_ip)
     dm.draw_line((0,90), (800, 90), width=3)
-    dm.draw_progress_bar(planPercentRemaining, 75, 100, 300, 40)
-    dm.draw_progress_bar(bonusPercentRemaining, 75, 150, 300, 40)
+
+    dm.draw_box((70,104), (400,220), 5)
+    dm.draw_text("Regular Plan", 80, 114, 28, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
+    dm.draw_progress_bar(planPercentRemaining, 80, 148, 300, 40)
+    dm.draw_text(str(planPercentRemaining) + " remaining", 80, 188, 28)
+
+    dm.draw_box((70,282), (400,398), 5)
+    dm.draw_text("Bonus Plan", 80, 292, 28, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
+    dm.draw_progress_bar(bonusPercentRemaining, 80, 326, 300, 40)
+    dm.draw_text(str(bonusPercentRemaining) + " remaining", 80, 366, 28)
+
     dm.display_image()
 
     # Start web server process

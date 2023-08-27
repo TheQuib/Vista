@@ -6,6 +6,7 @@ import logging
 from . import epd7in5_V2
 
 from PIL import Image,ImageDraw,ImageFont
+import qrcode
 
 epd = epd7in5_V2.EPD()
 
@@ -67,6 +68,31 @@ class DisplayManager:
     def draw_box(self, start_coords, end_coords, radius, fill_color='light-gray'):
         logging.info("Drawing rounded rectangle")
         self.draw.rounded_rectangle([start_coords, end_coords], radius, self.COLOR_MAP.get(fill_color, (180,180,180)))
+
+    def draw_qr_code(self, x, y, size, data):
+        qr = qrcode.make(data)
+        resized_qr = qr.resize((size, size))
+        self.image.paste(resized_qr, (x, y))
+
+    def clearScreen():
+        try:
+            logging.info("epd7in5_V2 Test")
+            epd = epd7in5_V2.EPD()
+
+            logging.info("Initialize and Clear")
+            epd.init()
+            epd.Clear()
+            
+            logging.info("Set display to sleep")
+            epd.sleep()
+
+        except IOError as e:
+            logging.info(e)
+
+        except KeyboardInterrupt:    
+            logging.info("ctrl + c:")
+            epd7in5_V2.epdconfig.module_exit()
+            exit()
 
     def display_image(self):
         try:

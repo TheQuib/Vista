@@ -50,8 +50,9 @@ class DisplayManager:
         self.draw.rounded_rectangle(filled_coords, radius=(bar_height - 2 * padding) // 2, fill=self.COLOR_MAP.get(bar_fill_color, (128,128,128)))
     
     def draw_text(self, text, x, y, fontSize=32, fontPath=None):
+        logging.debug("Setting default font")
         if fontPath is None:
-            fontPath = self.__location__ + 'font/Asap/Asap-VariableFont_wdth,wght.ttf'
+            fontPath = self.__location__ + '/font/Asap/Asap-VariableFont_wdth,wght.ttf'
         logging.debug("Drawing text")
         font = ImageFont.truetype(fontPath, size=fontSize)
         text_x = x

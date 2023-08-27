@@ -29,13 +29,20 @@ def main(example):
     web_thread.daemon = True
     web_thread.start()
    
-    # Calculate percentage
+    # Calculate percentages
     planRemaining = float(hughesnet_values['planRemaining'])
     planTotal = float(hughesnet_values['planTotal'])
     planPercentRemaining = round((planRemaining / planTotal) * 100, 2)
+    bonusRemaining = float(hughesnet_values['bonusRemaining'])
+    bonusTotal = float(hughesnet_values['bonusTotal'])
+    bonusPercentRemaining = round((bonusRemaining / bonusTotal) * 100, 2)
+
     # Display progress bar on display
     dm = DisplayManager()
-    dm.draw_progress_bar(planPercentRemaining, 75, 50, 300, 40)
+    dm.draw_text("SkyStat", 70, 25)
+    dm.draw_line((0,35), (800, 35))
+    dm.draw_progress_bar(planPercentRemaining, 75, 100, 300, 40)
+    dm.draw_progress_bar(bonusPercentRemaining, 75, 150, 300, 40)
     dm.display_image()
 
     # Wait 1 minute (dev purposes)

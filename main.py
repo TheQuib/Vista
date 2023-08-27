@@ -39,8 +39,9 @@ def main(example):
 
     # Display progress bar on display
     dm = DisplayManager()
-    dm.draw_text("SkyStat", 70, 25)
-    dm.draw_line((0,35), (800, 35))
+    dm.draw_text("SkyStat", 70, 15, 40)
+    dm.draw_text("github.com/TheQuib/SkyStat", 70, 58, 17)
+    dm.draw_line((0,90), (800, 90), width=3)
     dm.draw_progress_bar(planPercentRemaining, 75, 100, 300, 40)
     dm.draw_progress_bar(bonusPercentRemaining, 75, 150, 300, 40)
     dm.display_image()

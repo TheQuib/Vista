@@ -5,7 +5,7 @@ from src.screenControls import ScreenControls
 from src.web import Webserver
 from threading import Thread
 import os, logging, time
-import socket
+import psutil
 
 __location__ = os.path.realpath(
     os.path.join(
@@ -41,9 +41,8 @@ def main(example):
     bonusPercentRemaining = round((bonusRemaining / bonusTotal) * 100, 2)
 
     # Get IP Address of device
-    hostname = socket.gethostname()
-    local_ip = socket.gethostbyname(hostname)
-    local_ip = str(local_ip)
+    address = psutil.net_if_addrs()
+    local_ip = address['wlan0'][0].address
 
     # Display progress bar on display
     dm = DisplayManager()

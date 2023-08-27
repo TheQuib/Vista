@@ -7,48 +7,59 @@ from . import epd7in5_V2
 
 from PIL import Image,ImageDraw,ImageFont
 
-__location__ = os.path.realpath(
-    os.path.join(
-        os.getcwd(),
-        os.path.dirname(
-            __file__
-        )
-    )
-)
-
 epd = epd7in5_V2.EPD()
 
 logging.basicConfig(level=logging.DEBUG)
 
 class DisplayManager:
+    COLOR_MAP = {
+        'black': (0,0,0),
+        'white': (255,255,255),
+        'gray': (128,128,128)
+    }
+
+    __location__ = os.path.realpath(
+        os.path.join(
+            os.getcwd(),
+            os.path.dirname(
+                __file__
+            )
+        )
+    )
+
 
     def __init__(self, image_width=epd.width, image_height=epd.height):
         self.image = Image.new('RGB', (image_width, image_height), (255,255,255))
         self.draw = ImageDraw.Draw(self.image)
 
-    def draw_progress_bar(self, progress, x, y, bar_width, bar_height, padding=4, background_color=(50, 50, 50), bar_fill_color=(150, 150, 150), border_color=(50, 50, 50), border_width=4):
+    def draw_progress_bar(self, progress, x, y, bar_width, bar_height, padding=4, background_color='black', bar_fill_color='gray', border_color='black', border_width=4):
         logging.debug("Calculating progress size")
         filled_width = int((progress / 100) * (bar_width - 2 * padding))
 
         logging.debug("Drawing border of bar background")
         background_coords = [(x + padding - border_width, y + padding - border_width),
                              (x + bar_width - padding + border_width - 1, y + bar_height - padding + border_width - 1)]
-        self.draw.rounded_rectangle(background_coords, radius=(bar_height - 2 * padding) // 2, fill=background_color, outline=border_color, width=border_width)
+        self.draw.rounded_rectangle(background_coords, radius=(bar_height - 2 * padding) // 2, fill=self.COLOR_MAP.get(background_color, (0,0,0)), outline=self.COLOR_MAP.get(border_color, (0,0,0)), width=border_width)
 
         logging.debug("Drawing background of progress bar")
         background_coords = [(x + padding, y + padding), (x + bar_width - padding - 1, y + bar_height - padding - 1)]
-        self.draw.rounded_rectangle(background_coords, radius=(bar_height - 2 * padding) // 2, fill=background_color)
+        self.draw.rounded_rectangle(background_coords, radius=(bar_height - 2 * padding) // 2, fill=self.COLOR_MAP.get(background_color, (0,0,0)))
 
         logging.debug("Drawing progress bar")
         filled_coords = [(x + padding, y + padding), (x + filled_width + padding, y + bar_height - padding - 1)]
-        self.draw.rounded_rectangle(filled_coords, radius=(bar_height - 2 * padding) // 2, fill=bar_fill_color)
-
-        logging.debug("Drawing progress text")
-        progress_text = f"{progress}%"
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", size=32)
+        self.draw.rounded_rectangle(filled_coords, radius=(bar_height - 2 * padding) // 2, fill=self.COLOR_MAP.get(bar_fill_color, (128,128,128)))
+    
+    def draw_text(self, text, x, y, fontSize=32, fontPath=None):
+        if fontPath is None:
+            fontPath = self.__location__ + 'font/Asap/Asap-VariableFont_wdth,wght.ttf'
+        logging.debug("Drawing text")
+        font = ImageFont.truetype(fontPath, size=fontSize)
         text_x = x
-        text_y = y + bar_height
-        self.draw.text((text_x, text_y), progress_text, font=font, fill=(0, 0, 0))
+        text_y = y
+        self.draw.text((text_x, text_y), text, font=font, fill=(0, 0, 0))
+    
+    def draw_line(self, start_coords, end_coords, color=(0,0,0), width=2):
+        self.draw.line([start_coords, end_coords], fill=color, width=width)
 
     def display_image(self):
         try:

@@ -22,12 +22,6 @@ def main(example):
         logging.info("Parse HTML to get necessary values")
         hughesnet_values = GetHTML.parse_website(html)
         #print(hughesnet_values)
-    
-    # Start web server process
-    web = Webserver(clear_display=ScreenControls.clearScreen())
-    web_thread = Thread(target=web.start_server, args=(hughesnet_values['planTotal'], hughesnet_values['planRemaining'], hughesnet_values['bonusTotal'], hughesnet_values['bonusRemaining']))
-    web_thread.daemon = True
-    web_thread.start()
    
     # Calculate percentages
     planRemaining = float(hughesnet_values['planRemaining'])
@@ -45,6 +39,12 @@ def main(example):
     dm.draw_progress_bar(planPercentRemaining, 75, 100, 300, 40)
     dm.draw_progress_bar(bonusPercentRemaining, 75, 150, 300, 40)
     dm.display_image()
+
+    # Start web server process
+    web = Webserver(clear_display=ScreenControls.clearScreen())
+    web_thread = Thread(target=web.start_server, args=(hughesnet_values['planTotal'], hughesnet_values['planRemaining'], hughesnet_values['bonusTotal'], hughesnet_values['bonusRemaining']))
+    web_thread.daemon = True
+    web_thread.start()
 
     # Wait 1 minute (dev purposes)
     time.sleep(60)

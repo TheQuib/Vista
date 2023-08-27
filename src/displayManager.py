@@ -15,7 +15,8 @@ class DisplayManager:
     COLOR_MAP = {
         'black': (0,0,0),
         'white': (255,255,255),
-        'gray': (128,128,128)
+        'gray': (128,128,128),
+        'light-gray': (180,180,180)
     }
 
     __location__ = os.path.realpath(
@@ -36,16 +37,16 @@ class DisplayManager:
         logging.debug("Calculating progress size")
         filled_width = int((progress / 100) * (bar_width - 2 * padding))
 
-        logging.debug("Drawing border of bar background")
+        logging.info("Drawing border of bar background")
         background_coords = [(x + padding - border_width, y + padding - border_width),
                              (x + bar_width - padding + border_width - 1, y + bar_height - padding + border_width - 1)]
         self.draw.rounded_rectangle(background_coords, radius=(bar_height - 2 * padding) // 2, fill=self.COLOR_MAP.get(background_color, (0,0,0)), outline=self.COLOR_MAP.get(border_color, (0,0,0)), width=border_width)
 
-        logging.debug("Drawing background of progress bar")
+        logging.info("Drawing background of progress bar")
         background_coords = [(x + padding, y + padding), (x + bar_width - padding - 1, y + bar_height - padding - 1)]
         self.draw.rounded_rectangle(background_coords, radius=(bar_height - 2 * padding) // 2, fill=self.COLOR_MAP.get(background_color, (0,0,0)))
 
-        logging.debug("Drawing progress bar")
+        logging.info("Drawing progress bar")
         filled_coords = [(x + padding, y + padding), (x + filled_width + padding, y + bar_height - padding - 1)]
         self.draw.rounded_rectangle(filled_coords, radius=(bar_height - 2 * padding) // 2, fill=self.COLOR_MAP.get(bar_fill_color, (128,128,128)))
     
@@ -53,14 +54,19 @@ class DisplayManager:
         logging.debug("Setting default font")
         if fontPath is None:
             fontPath = self.__location__ + '/font/Asap/Asap-VariableFont_wdth,wght.ttf'
-        logging.debug("Drawing text")
+        logging.info("Drawing text")
         font = ImageFont.truetype(fontPath, size=fontSize)
         text_x = x
         text_y = y
         self.draw.text((text_x, text_y), text, font=font, fill=(0, 0, 0))
     
     def draw_line(self, start_coords, end_coords, color=(0,0,0), width=2):
+        logging.info("Drawing line")
         self.draw.line([start_coords, end_coords], fill=color, width=width)
+    
+    def draw_box(self, start_coords, end_coords, radius, fill_color='light-gray'):
+        logging.info("Drawing rounded rectangle")
+        self.draw.rounded_rectangle([start_coords, end_coords], radius, self.COLOR_MAP.get(fill_color, (180,180,180)))
 
     def display_image(self):
         try:

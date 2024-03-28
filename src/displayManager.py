@@ -73,6 +73,14 @@ class DisplayManager:
         qr = qrcode.make(data)
         resized_qr = qr.resize((size, size))
         self.image.paste(resized_qr, (x, y))
+    
+    def draw_image(self, x, y, width, path):
+        image = Image.open(path)
+        aspect_ratio = image.height / image.width
+        adjusted_height = int(width * aspect_ratio)
+        resized_iamge = image.resize((width, adjusted_height))
+        self.image.paste(resized_iamge, (x, y))
+        
 
     def clearScreen():
         try:

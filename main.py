@@ -85,12 +85,12 @@ def main(example):
     dm.draw_box((10, 225), (395,356), 10)
     dm.draw_text("Time left in cycle", 25, 234, 24, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
     dm.draw_progress_bar(25, 25, 274, 355, 35)
-    dm.draw_text(str(25) + "days remaining", 25, 313, 20)
+    dm.draw_text(str(25) + " days remaining", 25, 313, 20)
 
     logging.info("Drawing fun fact block")
     dm.draw_box((405, 225), (790, 356), 10)
     dm.draw_text("Fun fact", 420, 234, 24, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
-    dm.draw_multiline_text(random_fact, 420, 234, 24)
+    dm.draw_multiline_text(random_fact, 420, 274, 24)
 
     logging.info("Drawing footer")
     dm.draw_image(10, 370, 304, __location__ + '/assets/theCabin.bmp')

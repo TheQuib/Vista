@@ -51,25 +51,21 @@ class DisplayManager:
         filled_coords = [(x + padding, y + padding), (x + filled_width + padding, y + bar_height - padding - 1)]
         self.draw.rounded_rectangle(filled_coords, radius=(bar_height - 2 * padding) // 2, fill=self.COLOR_MAP.get(bar_fill_color, (128,128,128)))
 
-    def draw_text(self, text, x, y, fontSize=32, fontPath=None, align='left', right_edge=800, right_margin=10):
+    def draw_text(self, text, x, y, fontSize=32, fontPath=None, align='left', align_x=800, margin=10):
         logging.debug("Setting default font")
         if fontPath is None:
             fontPath = self.__location__ + '/font/Asap/Asap-VariableFont_wdth,wght.ttf'
         logging.info("Drawing text")
         font = ImageFont.truetype(fontPath, size=fontSize)
-        
-        # Calculate text size
-        text_width, text_height = font.getsize(text)
+        text_width = self.draw.textlength(text, font=font)
         
         if align == 'right':
-            # If align_from is not specified, default to display width (e.g., 800px)
-            if right_margin is None:
-                right_margin = epd.width  # Assuming 800px is the display width
-            text_x = right_margin - text_width - right_edge
+            text_x = align_x - text_width - margin
         else:
-            text_x = x  # Use the provided x for left alignment
+            text_x = x
         
         self.draw.text((text_x, y), text, font=font, fill=(0, 0, 0))
+
 
 # Original draw_text() function, just in case
 #    def draw_text(self, text, x, y, fontSize=32, fontPath=None):

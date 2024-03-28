@@ -57,13 +57,17 @@ class DisplayManager:
             fontPath = self.__location__ + '/font/Asap/Asap-VariableFont_wdth,wght.ttf'
         logging.info("Drawing text")
         font = ImageFont.truetype(fontPath, size=fontSize)
-        text_width, text_height = self.draw.textsize(text, font=font)
+        
+        # Calculate text size
+        text_width, text_height = font.getsize(text)
         
         if align == 'right':
-            # Use right_edge and right_margin to calculate the new x position
-            text_x = right_edge - text_width - right_margin
+            # If align_from is not specified, default to display width (e.g., 800px)
+            if right_margin is None:
+                right_margin = epd.width  # Assuming 800px is the display width
+            text_x = right_margin - text_width - right_edge
         else:
-            text_x = x  # Use the given x for left alignment or default cases
+            text_x = x  # Use the provided x for left alignment
         
         self.draw.text((text_x, y), text, font=font, fill=(0, 0, 0))
 

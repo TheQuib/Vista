@@ -68,4 +68,4 @@ def main(example):
     dm.display_image()
 
 logging.info("Running main")
-main(eample=True)
+main(example=True)

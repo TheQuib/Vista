@@ -33,6 +33,7 @@ def main(example):
         hughesnet_values = GetHTML.parse_website(html)
         #print(hughesnet_values)
 
+
     logging.info("Calculating usage percentages")
     planRemaining = float(hughesnet_values['planRemaining'])
     planTotal = float(hughesnet_values['planTotal'])
@@ -50,16 +51,15 @@ def main(example):
     todays_date = current_dateTime.strftime('%A, %B %d')
     lastUpdated_dateTime = current_dateTime.strftime('%m/%d/%y %I:%M %p')
 
-    logging.info("Loading facts from JSON file and selecting random fact")
+    logging.info("Getting facts from JSON file and selecting random fact")
     with open(__location__ + '/facts.json', 'r') as factsFile:
         facts = json.load(factsFile)
     random_fact = random.choice(facts)
     
 
+
     logging.info("Creating DisplayManager() object")
     dm = DisplayManager()
-
-
 
     logging.info("Begin drawing")
     logging.info("Drawing header")
@@ -73,17 +73,17 @@ def main(example):
     dm.draw_text("Manage this display:", 497, 447, 20)
     dm.draw_qr_code(690, 370, 100, local_ip)
 
-    logging.info("Drawing regular plan items")
-    dm.draw_box((70,104), (400,220), 5)
-    dm.draw_text("Regular Plan", 80, 114, 28, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
-    dm.draw_progress_bar(planPercentRemaining, 80, 148, 300, 40)
-    dm.draw_text(str(planPercentRemaining) + " remaining", 80, 188, 28)
+    logging.info("Drawing regular plan block")
+    dm.draw_box((10, 84), (395, 215), 10)
+    dm.draw_text("Regular plan", 25, 93, 24, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
+    dm.draw_progress_bar(planPercentRemaining, 25, 133, 355, 35)
+    dm.draw_text(str(planPercentRemaining) + "% remaining", 25, 172, 20)
 
-    logging.info("Drawing bonus plan items")
-    dm.draw_box((70,282), (400,398), 5)
-    dm.draw_text("Bonus Plan", 80, 292, 28, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
-    dm.draw_progress_bar(bonusPercentRemaining, 80, 326, 300, 40)
-    dm.draw_text(str(bonusPercentRemaining) + " remaining", 80, 366, 28)
+    logging.info("Drawing bonus plan block")
+    dm.draw_box((405, 84), (790, 215), 10)
+    dm.draw_text("Bonus plan", 420, 93, 24, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
+    dm.draw_progress_bar(bonusPercentRemaining, 420, 133, 355, 35)
+    dm.draw_text(str(bonusPercentRemaining) + "% remaining", 420, 172, 20)
 
     logging.info("Pushing image to E-Paper")
     dm.display_image()

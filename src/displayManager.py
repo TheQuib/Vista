@@ -60,11 +60,22 @@ class DisplayManager:
         text_x = x
         text_y = y
         self.draw.text((text_x, text_y), text, font=font, fill=(0, 0, 0))
-    
+
+    def draw_multiline_text(self, text_lines, x, y, fontSize=32, fontPath=None):
+        logging.debug("Setting default font")
+        if fontPath is None:
+            fontPath = self.__location__ + '/font/Asap/Asap-VariableFont_wdth,wght.ttf'
+        logging.info("Drawing text")
+        font = ImageFont.truetype(fontPath, size=fontSize)
+        text_y = y
+        for line in text_lines:
+            self.draw.text((x, text_y), line, font=font, fill=(0, 0, 0))
+            text_y += fontSize # Adjust for next line based on font size
+
     def draw_line(self, start_coords, end_coords, color=(0,0,0), width=2):
         logging.info("Drawing line")
         self.draw.line([start_coords, end_coords], fill=color, width=width)
-    
+
     def draw_box(self, start_coords, end_coords, radius, fill_color='light-gray'):
         logging.info("Drawing rounded rectangle")
         self.draw.rounded_rectangle([start_coords, end_coords], radius, self.COLOR_MAP.get(fill_color, (180,180,180)))
@@ -73,14 +84,14 @@ class DisplayManager:
         qr = qrcode.make(data)
         resized_qr = qr.resize((size, size))
         self.image.paste(resized_qr, (x, y))
-    
+
     def draw_image(self, x, y, width, path):
         image = Image.open(path)
         aspect_ratio = image.height / image.width
         adjusted_height = int(width * aspect_ratio)
         resized_iamge = image.resize((width, adjusted_height))
         self.image.paste(resized_iamge, (x, y))
-        
+
 
     def clearScreen():
         try:

@@ -65,9 +65,8 @@ def main(example):
     logging.info("Drawing header")
     dm.draw_text("SkyStat", 10, 4, 32)
     dm.draw_text("github.com/TheQuib/SkyStat", 10, 44, 16)
-    dm.draw_text(todays_date, 511, 4, 32)
-    dm.draw_text("Last updated " + lastUpdated_dateTime, x=0, y=43, fontSize=16, align='right', align_x=800, margin=10)
-#    dm.draw_text("Last updated " + lastUpdated_dateTime, 562, 43, 16)
+    dm.draw_text(todays_date, 511, 4, 32, align='right', right_edge=800, right_margin=10)
+    dm.draw_text("Last updated " + lastUpdated_dateTime, 0, 43, 16, align='right', right_edge=800, right_margin=10)
     dm.draw_line((0,70), (800, 70), width=3)
 
     logging.info("Drawing regular plan block")

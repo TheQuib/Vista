@@ -50,16 +50,33 @@ class DisplayManager:
         logging.info("Drawing progress bar")
         filled_coords = [(x + padding, y + padding), (x + filled_width + padding, y + bar_height - padding - 1)]
         self.draw.rounded_rectangle(filled_coords, radius=(bar_height - 2 * padding) // 2, fill=self.COLOR_MAP.get(bar_fill_color, (128,128,128)))
-    
-    def draw_text(self, text, x, y, fontSize=32, fontPath=None):
+
+    def draw_text(self, text, x, y, fontSize=32, fontPath=None, align='left', right_edge=800, right_margin=10):
         logging.debug("Setting default font")
         if fontPath is None:
             fontPath = self.__location__ + '/font/Asap/Asap-VariableFont_wdth,wght.ttf'
         logging.info("Drawing text")
         font = ImageFont.truetype(fontPath, size=fontSize)
-        text_x = x
-        text_y = y
-        self.draw.text((text_x, text_y), text, font=font, fill=(0, 0, 0))
+        text_width, text_height = self.draw.textsize(text, font=font)
+        
+        if align == 'right':
+            # Use right_edge and right_margin to calculate the new x position
+            text_x = right_edge - text_width - right_margin
+        else:
+            text_x = x  # Use the given x for left alignment or default cases
+        
+        self.draw.text((text_x, y), text, font=font, fill=(0, 0, 0))
+
+# Original draw_text() function, just in case
+#    def draw_text(self, text, x, y, fontSize=32, fontPath=None):
+#        logging.debug("Setting default font")
+#        if fontPath is None:
+#            fontPath = self.__location__ + '/font/Asap/Asap-VariableFont_wdth,wght.ttf'
+#        logging.info("Drawing text")
+#        font = ImageFont.truetype(fontPath, size=fontSize)
+#        text_x = x
+#        text_y = y
+#        self.draw.text((text_x, text_y), text, font=font, fill=(0, 0, 0))
 
     def draw_multiline_text(self, text_lines, x, y, fontSize=32, fontPath=None):
         logging.debug("Setting default font")

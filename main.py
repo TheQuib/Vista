@@ -4,6 +4,7 @@ from src.displayManager import DisplayManager
 from src.screenControls import ScreenControls
 from src.web import Webserver
 from threading import Thread
+from datetime import datetime
 import os, logging, time
 import psutil
 
@@ -42,15 +43,24 @@ def main(example):
     address = psutil.net_if_addrs()
     local_ip = address['wlan0'][0].address
 
+    logging.info("Getting current date and formatting")
+    current_dateTime = datetime.now()
+    todays_date = current_dateTime.strftime('%A, %B %d')
+    lastUpdated_dateTime = current_dateTime.strftime('%m/%d/%y %I:%M %p')
+
     logging.info("Creating DisplayManager() object")
     dm = DisplayManager()
 
     logging.info("Drawing static items")
-    dm.draw_text("SkyStat", 70, 15, 40)
-    dm.draw_text("github.com/TheQuib/SkyStat", 70, 58, 17)
+    dm.draw_text("SkyStat", 10, 4, 32)
+    dm.draw_text("github.com/TheQuib/SkyStat", 10, 41, 14)
     dm.draw_text("Manage this display...", 495, 445, 17)
     dm.draw_qr_code(655, 375, 100, local_ip)
     dm.draw_line((0,90), (800, 90), width=3)
+
+    logging.info("Drawing dynamic text")
+    dm.draw_text(todays_date, 511, 4, 32)
+    dm.draw_text(lastUpdated_dateTime, 607, 41, 14)
 
     logging.info("Drawing regular plan itmes")
     dm.draw_box((70,104), (400,220), 5)

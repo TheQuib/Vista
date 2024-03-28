@@ -90,7 +90,7 @@ def main(example):
     logging.info("Drawing fun fact block")
     dm.draw_box((405, 225), (790, 356), 10)
     dm.draw_text("Fun fact", 420, 234, 24, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
-    dm.draw_multiline_text(random_fact, 420, 274, 24)
+    dm.draw_multiline_text(random_fact, 420, 270, 24)
 
     logging.info("Drawing footer")
     dm.draw_image(10, 370, 304, __location__ + '/assets/theCabin.bmp')

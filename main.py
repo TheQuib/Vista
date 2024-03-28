@@ -58,7 +58,7 @@ def main(example):
     
 
 
-    logging.info("Creating DisplayManager() object")
+    logging.debug("Creating DisplayManager object")
     dm = DisplayManager()
 
     logging.info("Begin drawing")
@@ -66,7 +66,7 @@ def main(example):
     dm.draw_text("SkyStat", 10, 4, 32)
     dm.draw_text("github.com/TheQuib/SkyStat", 10, 44, 16)
     dm.draw_text(todays_date, 511, 4, 32)
-    dm.draw_text("Last updated:" + lastUpdated_dateTime, 581, 43, 16)
+    dm.draw_text("Last updated " + lastUpdated_dateTime, 562, 43, 16)
     dm.draw_line((0,70), (800, 70), width=3)
 
     logging.info("Drawing regular plan block")

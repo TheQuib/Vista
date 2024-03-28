@@ -67,11 +67,7 @@ def main(example):
     dm.draw_text("github.com/TheQuib/SkyStat", 10, 44, 16)
     dm.draw_text(todays_date, 511, 4, 32)
     dm.draw_text("Last updated:" + lastUpdated_dateTime, 581, 43, 16)
-    dm.draw_line((0,70), (800, 73), width=3)
-
-    logging.info("Drawing footer")
-    dm.draw_text("Manage this display:", 497, 447, 20)
-    dm.draw_qr_code(690, 370, 100, local_ip)
+    dm.draw_line((0,70), (800, 70), width=3)
 
     logging.info("Drawing regular plan block")
     dm.draw_box((10, 84), (395, 215), 10)
@@ -84,6 +80,23 @@ def main(example):
     dm.draw_text("Bonus plan", 420, 93, 24, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
     dm.draw_progress_bar(bonusPercentRemaining, 420, 133, 355, 35)
     dm.draw_text(str(bonusPercentRemaining) + "% remaining", 420, 172, 20)
+
+    logging.info("Drawing time left in cycle block")
+    dm.draw_box((10, 225), (395,356), 10)
+    dm.draw_text("Time left in cycle", 25, 234, 24, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
+    dm.draw_progress_bar(25, 25, 274, 355, 35)
+    dm.draw_text(str(25) + "days remaining", 25, 313, 20)
+
+    logging.info("Drawing fun fact block")
+    dm.draw_box((405, 225), (790, 356), 10)
+    dm.draw_text("Fun fact", 420, 234, 24, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
+    dm.draw_text(random_fact, 420, 274, 20)
+
+    logging.info("Drawing footer")
+    dm.draw_image(10, 370, 304, __location__ + '/assets/theCabin.bmp')
+    dm.draw_text("Manage this display:", 497, 447, 20)
+    dm.draw_qr_code(690, 370, 100, local_ip)
+
 
     logging.info("Pushing image to E-Paper")
     dm.display_image()

@@ -5,6 +5,8 @@ from src.screenControls import ScreenControls
 from src.web import Webserver
 from threading import Thread
 from datetime import datetime
+import random
+import json
 import os, logging, time
 import psutil
 
@@ -48,21 +50,30 @@ def main(example):
     todays_date = current_dateTime.strftime('%A, %B %d')
     lastUpdated_dateTime = current_dateTime.strftime('%m/%d/%y %I:%M %p')
 
+    logging.info("Loading facts from JSON file and selecting random fact")
+    with open(__location__ + '/facts.json', 'r') as factsFile:
+        facts = json.load(factsFile)
+    random_fact = random.choice(facts)
+    
+
     logging.info("Creating DisplayManager() object")
     dm = DisplayManager()
 
-    logging.info("Drawing static items")
+
+
+    logging.info("Begin drawing")
+    logging.info("Drawing header")
     dm.draw_text("SkyStat", 10, 4, 32)
-    dm.draw_text("github.com/TheQuib/SkyStat", 10, 41, 14)
-    dm.draw_text("Manage this display...", 495, 445, 17)
-    dm.draw_qr_code(655, 375, 100, local_ip)
-    dm.draw_line((0,90), (800, 90), width=3)
-
-    logging.info("Drawing dynamic text")
+    dm.draw_text("github.com/TheQuib/SkyStat", 10, 44, 16)
     dm.draw_text(todays_date, 511, 4, 32)
-    dm.draw_text(lastUpdated_dateTime, 607, 41, 14)
+    dm.draw_text("Last updated:" + lastUpdated_dateTime, 581, 43, 16)
+    dm.draw_line((0,70), (800, 73), width=3)
 
-    logging.info("Drawing regular plan itmes")
+    logging.info("Drawing footer")
+    dm.draw_text("Manage this display:", 497, 447, 20)
+    dm.draw_qr_code(690, 370, 100, local_ip)
+
+    logging.info("Drawing regular plan items")
     dm.draw_box((70,104), (400,220), 5)
     dm.draw_text("Regular Plan", 80, 114, 28, __location__ + '/src/font/Asap/static/Asap-SemiBold.ttf')
     dm.draw_progress_bar(planPercentRemaining, 80, 148, 300, 40)

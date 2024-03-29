@@ -4,3 +4,4 @@ Flask==2.3.2
 Pillow==10.2.0
 selenium==4.11.2
 spidev==3.5
+psutil

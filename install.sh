@@ -69,8 +69,7 @@ case $answer in
         $PYTHON_PATH "$INSTALL_DIR/$SCRIPT_NAME"
         ;;
     [Nn]* )
-        echo "Not pushing changes. You can run it later by executing $PYTHON_PATH $INSTALL_DIR/$SCRIPT_NAME"
-        echo "or by rebooting / waiting 5 minutes."
+        echo "Not pushing changes. You can push manually by execution /opt/skystat/main.py"
         ;;
     * )
         echo "Please answer yes (y) or no (n)."

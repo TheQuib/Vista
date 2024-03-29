@@ -18,8 +18,8 @@ echo "Removing the systemd service file..."
 sudo rm /etc/systemd/system/${SERVICE_NAME}.service
 sudo systemctl daemon-reload
 
-# Remove the cron job
-echo "Removing the cron job for $SCRIPT_NAME..."
+# Remove the cron jobs
+echo "Removing the cron jobs for $SCRIPT_NAME..."
 (crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$SCRIPT_NAME") | crontab -
 
 # Remove the installed project files

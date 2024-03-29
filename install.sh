@@ -37,9 +37,9 @@ sudo systemctl daemon-reload
 sudo systemctl enable ${SERVICE_NAME}.service
 sudo systemctl start ${SERVICE_NAME}.service
 
-# Create a cron job for the script
-echo "Creating a cron job for $SCRIPT_NAME to run every 5 minutes..."
-CRON_JOB="*/5 * * * * $PYTHON_PATH $INSTALL_DIR/$SCRIPT_NAME >> $INSTALL_DIR/main.log 2>&1"
-(crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$SCRIPT_NAME"; echo "$CRON_JOB") | crontab -
+# Create a combined cron job for the script
+echo "Creating a cron job for $SCRIPT_NAME to run at startup and every 5 minutes..."
+CRON_JOB="@reboot $PYTHON_PATH $INSTALL_DIR/$SCRIPT_NAME >> $INSTALL_DIR/main.log 2>&1\n*/5 * * * * $PYTHON_PATH $INSTALL_DIR/$SCRIPT_NAME >> $INSTALL_DIR/main.log 2>&1"
+(crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$SCRIPT_NAME"; echo -e "$CRON_JOB") | crontab -
 
 echo "Installation completed."

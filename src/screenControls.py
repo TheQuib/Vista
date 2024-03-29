@@ -6,7 +6,7 @@ import logging
 
 from . import epd7in5_V2
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 class ScreenControls:
     def clearScreen():

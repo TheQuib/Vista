@@ -17,8 +17,14 @@ PYTHON_PATH="/usr/bin/python3"  # Change this if you're using a virtualenv
 # Copy project files to the install directory
 echo "Copying project files to $INSTALL_DIR..."
 sudo mkdir -p $INSTALL_DIR
-sudo cp -r $SOURCE_DIR/* $INSTALL_DIR
-sudo chmod +x $INSTALL_DIR/main.py
+sudo cp -r $SOURCE_DIR/assets $INSTALL_DIR
+sudo cp -r $SOURCE_DIR/src $INSTALL_DIR
+sudo cp $SOURCE_DIR/drawImage.py $INSTALL_DIR
+sudo cp $SOURCE_DIR/example.html $INSTALL_DIR
+sudo cp $SOURCE_DIR/facts.json $INSTALL_DIR
+sudo cp $SOURCE_DIR/main.py $INSTALL_DIR
+sudo cp $SOURCE_DIR/web.py $INSTALL_DIR
+sudo chmod +x $INSTALL_DIR/main.py $INSTALL_DIR
 
 # Create systemd service file for Flask app
 echo "Creating systemd service file for the Flask app..."

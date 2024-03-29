@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Check if the script is run as root
-if [ "$(id -u)" != "0" ]; then
-   echo "This script must be run as root" 1>&2
+# Ensure the script is NOT run as root
+if [ "$(id -u)" == "0" ]; then
+   echo "This script should not be run as root or with sudo. Please run as your normal user." 1>&2
    exit 1
 fi
 

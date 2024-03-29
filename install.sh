@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Check if the script is run as root
-if [ "$(id -u)" != "0" ]; then
-   echo "This script must be run as root" 1>&2
+# Ensure the script is NOT run as root
+if [ "$(id -u)" == "0" ]; then
+   echo "This script should not be run as root or with sudo. Please run as your normal user." 1>&2
    exit 1
 fi
 
@@ -18,6 +18,7 @@ PYTHON_PATH="/usr/bin/python3"  # Change this if you're using a virtualenv
 echo "Copying project files to $INSTALL_DIR..."
 sudo mkdir -p $INSTALL_DIR
 sudo cp -r $SOURCE_DIR/* $INSTALL_DIR
+sudo chmod +x $INSTALL_DIR/main.py
 
 # Create systemd service file for Flask app
 echo "Creating systemd service file for the Flask app..."
@@ -41,7 +42,7 @@ EOF
 IP_ADDRESS=$(ip -4 addr show wlan0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 
 # Enable and start the Flask app service
-echo "Enabling and starting the Flask app service on $IP_ADDRESS:5000..."
+echo "Enabling and starting the Flask app service on http://$IP_ADDRESS:5000..."
 sudo systemctl daemon-reload
 sudo systemctl enable ${SERVICE_NAME}.service
 sudo systemctl start ${SERVICE_NAME}.service
@@ -52,3 +53,20 @@ CRON_JOB="@reboot $PYTHON_PATH $INSTALL_DIR/$SCRIPT_NAME >> $INSTALL_DIR/main.lo
 (crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$SCRIPT_NAME"; echo -e "$CRON_JOB") | crontab -
 
 echo "Installation completed."
+
+# Ask the user if they want to run main.py now
+read -p "Do you want to push information to the display now? (y/n) " answer
+
+case $answer in
+    [Yy]* )
+        echo "Pushing..."
+        $PYTHON_PATH "$INSTALL_DIR/$SCRIPT_NAME"
+        ;;
+    [Nn]* )
+        echo "Not pushing changes. You can run it later by executing $PYTHON_PATH $INSTALL_DIR/$SCRIPT_NAME"
+        echo "or by rebooting / waiting 5 minutes."
+        ;;
+    * )
+        echo "Please answer yes (y) or no (n)."
+        ;;
+esac

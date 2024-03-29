@@ -17,7 +17,6 @@
   ["Peanuts aren't nuts. They", "are legumes, like peas."],
   ["The heart of a shrimp is", "located in its head."],
   ["Snails can sleep for up", "to three years."],
-  ["The fingerprints of a", "koala are so indistinguishable", "from humans, they can", "contaminate crime scenes."],
   ["Slugs have four noses."],
   ["Humans and bananas share", "about 50% of their DNA."],
   ["You can't hum while holding", "your nose closed."],
@@ -26,7 +25,7 @@
   ["Sea otters hold hands when", "they sleep to keep from", "drifting apart."],
   ["Venus rotates clockwise. It's", "one of only two planets", "that do this."],
   ["A group of crows is", "called a murder."],
-  ["Dolphins have names for", "each other and can", "call out for each other", "specifically."],
+  ["Dolphins have names for each other", "and can call out for", "each other specifically"],
   ["The unicorn is the", "national animal of Scotland."],
   ["A single strand of", "spaghetti is called a", "\"spaghetto.\""],
   ["An octopus will eat", "its own arms if", "it gets really hungry."],
@@ -47,6 +46,5 @@
   ["An ostrich's eye is bigger", "than its brain."],
   ["Most of the dust in", "your home is made from", "dead skin cells."],
   ["The Atlantic Ocean is", "saltier than the Pacific."],
-  ["Cleopatra lived closer in", "time to the moon landing", "than to the building of", "the Great Pyramid."],
   ["Horses and cows can sleep", "standing up, but they", "dream only when lying down."]
 ]

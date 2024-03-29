@@ -1,7 +1,13 @@
 #!/bin/bash
 
+# Check if the script is run as root
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
 # Define paths and names
-SOURCE_DIR="/home/skystat"
+SOURCE_DIR="$(dirname "$0")"
 INSTALL_DIR="/opt/skystat"
 FLASK_APP="web.py"
 SCRIPT_NAME="main.py"
@@ -31,8 +37,11 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
+# Get IP address of wlan0 interface
+IP_ADDRESS=$(ip -4 addr show wlan0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+
 # Enable and start the Flask app service
-echo "Enabling and starting the Flask app service..."
+echo "Enabling and starting the Flask app service on $IP_ADDRESS:5000..."
 sudo systemctl daemon-reload
 sudo systemctl enable ${SERVICE_NAME}.service
 sudo systemctl start ${SERVICE_NAME}.service

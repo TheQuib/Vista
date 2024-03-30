@@ -10,7 +10,8 @@ fi
 SOURCE_DIR="$(dirname "$0")"
 INSTALL_DIR="/opt/skystat"
 FLASK_APP="web.py"
-SCRIPT_NAME="main.py"
+REFRESH_SCRIPT="main.py"
+REBOOT_SCRIPT="network_check.sh"
 SERVICE_NAME="skystatweb"
 PYTHON_PATH="/usr/bin/python3"  # Change this if you're using a virtualenv
 
@@ -23,8 +24,12 @@ sudo cp $SOURCE_DIR/drawImage.py $INSTALL_DIR
 sudo cp $SOURCE_DIR/example.html $INSTALL_DIR
 sudo cp $SOURCE_DIR/facts.json $INSTALL_DIR
 sudo cp $SOURCE_DIR/main.py $INSTALL_DIR
+sudo cp $SOURCE_DIR/network_check.sh $INSTALL_DIR
 sudo cp $SOURCE_DIR/web.py $INSTALL_DIR
+sudo cp $SOURCE_DIR/uninstall.sh $INSTALL_DIR
 sudo chmod +x $INSTALL_DIR/main.py $INSTALL_DIR
+sudo chmod +x $INSTALL_DIR/uninstall.sh $INSTALL_DIR
+sudo chmod +x $INSTALL_DIR/network_check.sh $INSTALL_DIR
 
 # Create systemd service file for Flask app
 echo "Creating systemd service file for the Flask app..."
@@ -54,9 +59,9 @@ sudo systemctl enable ${SERVICE_NAME}.service
 sudo systemctl start ${SERVICE_NAME}.service
 
 # Create a combined cron job for the script
-echo "Creating a cron job for $SCRIPT_NAME to run at startup and every 5 minutes..."
-CRON_JOB="@reboot $PYTHON_PATH $INSTALL_DIR/$SCRIPT_NAME >> $INSTALL_DIR/main.log 2>&1\n*/5 * * * * $PYTHON_PATH $INSTALL_DIR/$SCRIPT_NAME >> $INSTALL_DIR/main.log 2>&1"
-(crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$SCRIPT_NAME"; echo -e "$CRON_JOB") | crontab -
+echo "Creating a cron job for running at startup and every 5 minutes..."
+CRON_JOB="@reboot cd $INSTALL_DIR && $PYTHON_PATH $REBOOT_SCRIPT >> ~/skystat.log 2>&1\n*/1 * * * * cd $INSTALL_DIR && $PYTHON_PATH $REFRESH_SCRIPT >> ~/skystat.log 2>&1"
+(crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$REFRESH_SCRIPT"; echo -e "$CRON_JOB") | crontab -
 
 echo "Installation completed."
 
@@ -66,10 +71,10 @@ read -p "Do you want to push information to the display now? (y/n) " answer
 case $answer in
     [Yy]* )
         echo "Pushing..."
-        $PYTHON_PATH "$INSTALL_DIR/$SCRIPT_NAME"
+        $PYTHON_PATH "$INSTALL_DIR/$REFRESH_SCRIPT"
         ;;
     [Nn]* )
-        echo "Not pushing changes. You can push manually by execution /opt/skystat/main.py"
+        echo "Not pushing changes. You can push manually by execution $INSTALL_DIR/$REFRESH_SCRIPT"
         ;;
     * )
         echo "Please answer yes (y) or no (n)."

@@ -1,43 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Stats</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkyStat Web</title>
+<link href="https://fonts.googleapis.com/css2?family=Asap:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" href="{{ url_for('static', filename='assets/favicon.png') }}" type="image/x-icon">
+<style>
+  body {
+    font-family: 'Asap', sans-serif;
+  }
+  .SkystatWeb {
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .page-title, .page-subtitle {
+    text-align: center;
+    width: 100%;
+  }
+  .page-title { margin-bottom: 5px; font-size: 32px; }
+  .page-subtitle { margin-bottom: 20px; font-size: 18px; }
+
+  .grid-container {
+    font-size: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 20px; /* Added margin for space between rows and control sections */
+  }
+  .section {
+    flex: 1 1 calc(50% - 10px);
+    box-sizing: border-box;
+    padding: 10px;
+    background: #D9D9D9;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .section-title {
+    font-size: 22px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  .progressbar {
+    height: 15px;
+    background-color: #393939;
+    border-radius: 5px;
+    width: 80%;
+    margin: 5px 0 10px;
+  }
+
+  .control-sections {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .control-section {
+    flex-grow: 1;
+    text-align: center;
+    background: linear-gradient(90deg, #6184FF 0%, #2FB4FF 100%);
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+  }
+
+  img.Thecabinlogo {
+    max-width: 270px; /* Original max-width for larger screens */
+    height: auto;
+    margin: 20px auto;
+    display: block;
+  }
+
+  /* Adjustments for smaller screens */
+  @media (max-width: 600px) {
+    img.Thecabinlogo {
+      max-width: 150px; /* Smaller max-width for smaller screens */
+    }
+
+    .grid-container, .control-sections {
+      font-size: 18px;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .section, .control-section {
+      flex-basis: 100%; /* Make each section take the full container width */
+    }
+
+    .control-sections {
+      flex-wrap: nowrap; /* Ensure control sections don't wrap */
+    }
+
+    .section-title {
+      font-size: 20px;
+    }
+
+    .page-title, .page-subtitle {
+      text-align: left;
+      padding-left: 10px;
+    }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Hughesnet stats</h1>
-        <p>Current plan limits and data usage :)</p>
-        
-        <button id="refreshDisplay-button" class="refreshDisplay-button">Refresh Display</button>
-        <button id="clearDisplay-button" class="clearDisplay-button">Clear Display</button>
-    </div>
 
-    <div>
-        <div class="progress-container regular">
-            <div class="plan-info">
-              <div class="total">Total: {{ regular_total }} GB</div>
-              <div class="used">Used: {{ regular_used }} GB</div>
-            </div>
-            <div class="progress-bar">
-              <div class="progress" style="height: {{ regular_percentage }}%;"></div>
-            </div>
-          </div>
-          
-          <div class="progress-container bonus">
-            <div class="plan-info">
-              <div class="total">Total: {{ bonus_total }} GB</div>
-              <div class="used">Used: {{ bonus_used }} GB</div>
-            </div>
-            <div class="progress-bar">
-              <div class="progress" style="height: {{ bonus_percentage }}%;"></div>
-            </div>
-        </div>
+<div class="SkystatWeb">
+  <div class="page-title">SkyStat</div>
+  <div class="page-subtitle">github.com/TheQuib/SkyStat</div>
+  
+  <div class="grid-container">
+    <div class="section Regularplan">
+      <div class="section-title">Regular Plan</div>
+      <div class="progressbar"></div>
+      <div>20% remaining</div>
     </div>
+    
+    <div class="section Bonusplan">
+      <div class="section-title">Bonus Plan</div>
+      <div class="progressbar"></div>
+      <div>20% remaining</div>
+    </div>
+    
+    <div class="section Timeremaining">
+      <div class="section-title">Time Remaining</div>
+      <div class="progressbar"></div>
+      <div>5 days remaining</div>
+    </div>
+    
+    <div class="section Funfact">
+      <div class="section-title">Fun Fact</div>
+      <div>Honey never spoils. Ancient Egyptians ate edible honey thousands of years old.</div>
+    </div>
+  </div>
 
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script> 
+  <div class="control-sections">
+    <div class="control-section Refreshdisplay">
+      <div>Refresh display</div>
+    </div>
+    
+    <div class="control-section Cleardisplay">
+      <div>Clear display</div>
+    </div>
+    
+    <div class="control-section Settings">
+      <div>Settings</div>
+    </div>
+  </div>
+  
+  <img class="Thecabinlogo" src="{{ url_for('static', filename='assets/theCabin.png') }}" alt="The Cabin Logo">
+</div>
+
 </body>
 </html>
-

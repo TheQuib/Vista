@@ -64,7 +64,7 @@ class GatherValues:
         logging.info("Getting IP Address of device")
         address = psutil.net_if_addrs()
         self.local_ip = address['wlan0'][0].address
-        self.web_address = 'http://' + self.local_ip
+        self.web_address = 'http://' + self.local_ip + ':5000'
 
         logging.info("Getting current date and formatting")
         current_dateTime = datetime.now()

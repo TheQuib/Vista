@@ -63,7 +63,7 @@ SOURCE_DIR="$(dirname "$0")"
 INSTALL_DIR="/opt/skystat"
 FLASK_APP="web.py"
 REFRESH_SCRIPT="main.py"
-REBOOT_SCRIPT="network_check.sh"
+REBOOT_SCRIPT="boot.py"
 SERVICE_NAME="skystatweb"
 PYTHON_PATH="/usr/bin/python3"  # Change this if you're using a virtualenv
 

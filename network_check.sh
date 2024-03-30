@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Initialize variable to hold the gateway IP
+# Initialize variables
 GATEWAY_IP=""
+LOG_FILE="~/skystat.log"
 
 # Function to get the default gateway IP
 get_gateway_ip() {
@@ -27,4 +28,4 @@ while ! ping -c 1 -W 1 $GATEWAY_IP > /dev/null; do
 done
 
 echo "Network is up. Executing main.py."
-/usr/bin/python3 /opt/skystat/main.py >> /opt/skystat/main.log 2>&1
+/usr/bin/python3 /opt/skystat/main.py >> $LOG_FILE 2>&1

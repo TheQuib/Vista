@@ -25,7 +25,10 @@ class BootScreen:
         dm = DisplayManager()
 
         logging.info("Drawing boot screen")
-        dm.draw_image(10, 370, 304, __location__ + '/assets/theCabin.bmp')
+        dm.draw_image(0, 0, 800, __location__ + '/assets/bootScreen.bmp')
+
+        logging.info("Pushing image to E-Paper")
+        dm.display_image()
 
 class GatherValues:
     def __init__(self, debug=False):

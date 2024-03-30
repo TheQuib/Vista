@@ -9,7 +9,8 @@ fi
 # Define paths and names
 INSTALL_DIR="/opt/skystat"
 SERVICE_NAME="skystatweb"
-SCRIPT_NAME="main.py"
+REFRESH_SCRIPT="main.py"
+REBOOT_SCRIPT="network_check.sh"
 
 # Stop the Flask app service
 echo "Stopping the Flask app service..."
@@ -25,8 +26,9 @@ sudo rm /etc/systemd/system/${SERVICE_NAME}.service
 sudo systemctl daemon-reload
 
 # Remove the cron jobs
-echo "Removing the cron jobs for $SCRIPT_NAME..."
-(crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$SCRIPT_NAME") | crontab -
+echo "Removing the cron jobs for $REFRESH_SCRIPT..."
+(crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$REFRESH_SCRIPT") | crontab -
+(crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$REBOOT_SCRIPT") | crontab -
 
 # Remove the installed project files
 echo "Removing installed project files from $INSTALL_DIR..."

@@ -76,12 +76,12 @@ sudo cp $SOURCE_DIR/drawImage.py $INSTALL_DIR
 sudo cp $SOURCE_DIR/example.html $INSTALL_DIR
 sudo cp $SOURCE_DIR/facts.json $INSTALL_DIR
 sudo cp $SOURCE_DIR/main.py $INSTALL_DIR
-sudo cp $SOURCE_DIR/network_check.sh $INSTALL_DIR
+sudo cp $SOURCE_DIR/boot.py $INSTALL_DIR
 sudo cp $SOURCE_DIR/web.py $INSTALL_DIR
 sudo cp $SOURCE_DIR/uninstall.sh $INSTALL_DIR
 sudo chmod +x $INSTALL_DIR/main.py $INSTALL_DIR
 sudo chmod +x $INSTALL_DIR/uninstall.sh $INSTALL_DIR
-sudo chmod +x $INSTALL_DIR/network_check.sh $INSTALL_DIR
+sudo chmod +x $INSTALL_DIR/boot.p $INSTALL_DIR
 
 # Create systemd service file for Flask app
 echo "Creating systemd service file for the Flask app..."

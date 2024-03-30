@@ -112,7 +112,7 @@ sudo systemctl start ${SERVICE_NAME}.service
 
 # Create a combined cron job for the script
 echo "Creating a cron job for running at startup and every 5 minutes..."
-CRON_JOB="@reboot cd $INSTALL_DIR && $PYTHON_PATH $REBOOT_SCRIPT >> ~/skystat.log 2>&1\n*/1 * * * * cd $INSTALL_DIR && $PYTHON_PATH $REFRESH_SCRIPT >> ~/skystat.log 2>&1"
+CRON_JOB="@reboot cd $INSTALL_DIR && $PYTHON_PATH $REBOOT_SCRIPT >> ~/skystat.log 2>&1\n*/5 * * * * cd $INSTALL_DIR && $PYTHON_PATH $REFRESH_SCRIPT >> ~/skystat.log 2>&1"
 (crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$REFRESH_SCRIPT"; echo -e "$CRON_JOB") | crontab -
 
 echo "Installation completed."

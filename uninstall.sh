@@ -10,7 +10,7 @@ fi
 INSTALL_DIR="/opt/skystat"
 SERVICE_NAME="skystatweb"
 REFRESH_SCRIPT="main.py"
-REBOOT_SCRIPT="network_check.sh"
+REBOOT_SCRIPT="boot.py"
 
 # Stop the Flask app service
 echo "Stopping the Flask app service..."
@@ -27,8 +27,8 @@ sudo systemctl daemon-reload
 
 # Remove the cron jobs
 echo "Removing the cron jobs for $REFRESH_SCRIPT..."
-(crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$REFRESH_SCRIPT") | crontab -
-(crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$REBOOT_SCRIPT") | crontab -
+(crontab -l | grep -v -F "@reboot cd $INSTALL_DIR && /usr/bin/python3 $REBOOT_SCRIPT >> ~/skystat.log 2>&1") | crontab -
+(crontab -l | grep -v -F "*/5 * * * * cd $INSTALL_DIR && /usr/bin/python3 $REFRESH_SCRIPT >> ~/skystat.log 2>&1") | crontab -
 
 # Remove the installed project files
 echo "Removing installed project files from $INSTALL_DIR..."

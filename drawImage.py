@@ -19,6 +19,14 @@ __location__ = os.path.realpath(
     )
 )
 
+class BootScreen:
+    def __init__(self):
+        logging.debug("Creating DisplayManager object")
+        dm = DisplayManager()
+
+        logging.info("Drawing boot screen")
+        dm.draw_image(10, 370, 304, __location__ + '/assets/theCabin.bmp')
+
 class GatherValues:
     def __init__(self, debug=False):
         if debug == True:
@@ -27,7 +35,7 @@ class GatherValues:
             example = False
 
         if example == True:
-            with open('example.html') as html:
+            with open(__location__ + '/example.html') as html:
                 logging.info("Parsing example HTML to get necessary values")
                 hughesnet_values = GetHTML.parse_website(html)
                 #print(hughesnet_values)

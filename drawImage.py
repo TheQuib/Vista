@@ -64,6 +64,7 @@ class GatherValues:
         logging.info("Getting IP Address of device")
         address = psutil.net_if_addrs()
         self.local_ip = address['wlan0'][0].address
+        self.web_address = 'http://' + self.local_ip
 
         logging.info("Getting current date and formatting")
         current_dateTime = datetime.now()
@@ -77,7 +78,7 @@ class GatherValues:
         
 
 class DrawImage:
-    def __init__(self, todays_date, lastUpdated_dateTime, planPercentRemaining, bonusPercentRemaining, random_fact, local_ip):
+    def __init__(self, todays_date, lastUpdated_dateTime, planPercentRemaining, bonusPercentRemaining, random_fact, web_address):
         logging.debug("Creating DisplayManager object")
         dm = DisplayManager()
 
@@ -115,7 +116,7 @@ class DrawImage:
         logging.info("Drawing footer")
         dm.draw_image(10, 370, 304, __location__ + '/assets/theCabin.bmp')
         dm.draw_text("Manage this display:", 497, 447, 20)
-        dm.draw_qr_code(690, 370, 100, local_ip)
+        dm.draw_qr_code(690, 370, 100, web_address)
 
 
         logging.info("Pushing image to E-Paper")

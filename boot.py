@@ -1,0 +1,3 @@
+import drawImage
+
+drawImage.BootScreen()

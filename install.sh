@@ -6,6 +6,58 @@ if [ "$(id -u)" == "0" ]; then
    exit 1
 fi
 
+
+################
+# DEPENDENCIES #
+################
+
+# Determine the directory in which the script resides
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Update package lists
+echo "Updating package lists..."
+sudo apt update
+
+# Ensure Python is installed
+if ! command -v /usr/bin/python &> /dev/null
+then
+    echo "Installing Python..."
+    sudo apt-get install -y python3 python3-numpy libopenjp2-7-dev
+else
+    echo "Python is already installed."
+fi
+
+# Ensure Pip is installed
+if ! command -v pip &> /dev/null
+then
+    echo "Installing Python-Pip..."
+    sudo apt-get install -y python3-pip
+else
+    echo "Pip is already installed."
+fi
+
+# Ensure Python dependencies are installed
+pip install -r $CURRENT_DIR/requirements.txt
+
+# Check if 'dtparam=spi=on' exists and is uncommented
+if grep -qE "^dtparam=spi=on$" "/boot/config.txt"
+then
+    echo "SPI interface is already enabled."
+else
+    # Ensure any existing 'dtparam=spi' line is commented out
+    sudo sed -i 's/^\(dtparam=spi.*\)$/#\1/' "/boot/config.txt"
+    
+    # Add 'dtparam=spi=on' to the end of the file
+    echo "Enabling SPI interface..."
+    echo "dtparam=spi=on" | sudo tee -a "/boot/config.txt" > /dev/null
+    $REBOOT_REQUIRED="true"
+fi
+
+
+###################
+# SKYSTAT INSTALL #
+###################
+
 # Define paths and names
 SOURCE_DIR="$(dirname "$0")"
 INSTALL_DIR="/opt/skystat"
@@ -65,18 +117,42 @@ CRON_JOB="@reboot cd $INSTALL_DIR && $PYTHON_PATH $REBOOT_SCRIPT >> ~/skystat.lo
 
 echo "Installation completed."
 
-# Ask the user if they want to run main.py now
-read -p "Do you want to push information to the display now? (y/n) " answer
 
-case $answer in
-    [Yy]* )
-        echo "Pushing..."
-        $PYTHON_PATH "$INSTALL_DIR/$REFRESH_SCRIPT"
-        ;;
-    [Nn]* )
-        echo "Not pushing changes. You can push manually by execution $INSTALL_DIR/$REFRESH_SCRIPT"
-        ;;
-    * )
-        echo "Please answer yes (y) or no (n)."
-        ;;
-esac
+################
+# POST INSTALL #
+################
+# Check if reboot is required
+if [ "$REBOOT_REQUIRED" = "true" ]
+then
+    # Ask for reboot
+    read -p "SPI interface enabled. Reboot now to apply changes? (y/n) " answer
+
+    case $answer in
+        [Yy]* )
+            echo "Rebooting now..."
+            sudo reboot
+            ;;
+        [Nn]* )
+            echo "Please reboot the system manually to apply SPI interface changes."
+            ;;
+        * )
+            echo "Invalid response. Please reboot the system manually to apply SPI interface changes."
+            ;;
+    esac
+else
+    # Ask the user if they want to run main.py now
+    read -p "Do you want to push information to the display now? (y/n) " answer
+
+    case $answer in
+        [Yy]* )
+            echo "Pushing..."
+            $PYTHON_PATH "$INSTALL_DIR/$REFRESH_SCRIPT"
+            ;;
+        [Nn]* )
+            echo "Not pushing changes. You can push manually by execution $INSTALL_DIR/$REFRESH_SCRIPT"
+            ;;
+        * )
+            echo "Please answer yes (y) or no (n)."
+            ;;
+    esac
+fi

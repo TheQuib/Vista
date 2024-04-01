@@ -1,4 +1,4 @@
-# SkyStat
+# Vista
 Scrapes data from the HughesNet usage page, displays on a Waveshare 7.5" e-ink display (epd7in5) and opens a web server for display management.
 
 # Requirements
@@ -10,8 +10,8 @@ Scrapes data from the HughesNet usage page, displays on a Waveshare 7.5" e-ink d
 You can install everything by running:
 ```bash
 cd ~
-git clone https://github.com/thequib/skystat
-cd skystat
+git clone https://github.com/thequib/vista
+cd vista
 chmod +x install.sh
 ./install.sh
 ```
@@ -51,22 +51,22 @@ echo "dtparam=spi=on" | sudo tee -a "/boot/config.txt" > /dev/null
 ### Copy project files
 ```bash
 cd ~
-mkdir /opt/skystat
-sudo cp -r skystat/* /opt/skystat
+mkdir /opt/vista
+sudo cp -r vista/* /opt/vista
 ```
 
 ### Create service for web app (optional)
 ```bash
 # Create service file
-cat <<EOF | sudo tee /etc/systemd/system/skystatweb.service > /dev/null
+cat <<EOF | sudo tee /etc/systemd/system/vistaweb.service > /dev/null
 [Unit]
-Description=Skystat Flask Web Service
+Description=Vista Web Service
 After=network.target
 
 [Service]
 User=pi
-WorkingDirectory=$INSTALL_DIR
-ExecStart=$PYTHON_PATH $INSTALL_DIR/$FLASK_APP
+WorkingDirectory=/opt/vista
+ExecStart=/usr/bin/python /opt/vista/web.py
 
 Restart=always
 
@@ -76,15 +76,15 @@ EOF
 
 # Enable and start app
 sudo systemctl daemon-reload
-sudo systemctl enable skystatweb.service
-sudo systemctl start skystatweb.service
+sudo systemctl enable vistaweb.service
+sudo systemctl start vistaweb.service
 ```
 
 ### Create cron job for the script to run every `x` minutes
 #### Via command one-liner
 ```bash
-CRON_JOB="@reboot cd /opt/skystat && /usr/bin/python3 boot.py >> ~/skystat.log 2>&1\n*/5 * * * * cd /opt/skystat && /usr/bin/python main.py >> ~/skystat.log 2>&1"
-(crontab -l 2>/dev/null | grep -v -F "/opt/skystat/main.py"; echo -e "$CRON_JOB") | crontab -
+CRON_JOB="@reboot cd /opt/vista && /usr/bin/python3 boot.py >> ~/vista.log 2>&1\n*/5 * * * * cd /opt/vista && /usr/bin/python main.py >> ~/vista.log 2>&1"
+(crontab -l 2>/dev/null | grep -v -F "/opt/vista/main.py"; echo -e "$CRON_JOB") | crontab -
 ```
 
 #### Manually
@@ -96,8 +96,8 @@ crontab -e
 
 Enter the following
 ```
-@reboot cd /opt/skystat && /usr/bin/python3 boot.py >> ~/skystat.log 2>&1\
-*/5 * * * * cd /opt/skystat && /usr/bin/python main.py >> ~/skystat.log 2>&1"
+@reboot cd /opt/vista && /usr/bin/python3 boot.py >> ~/vista.log 2>&1\
+*/5 * * * * cd /opt/vista && /usr/bin/python main.py >> ~/vista.log 2>&1"
 ```
 
 Save the file
@@ -106,7 +106,7 @@ Save the file
 ## With included uninstaller script
 You can uninstall everything automatically by running:
 ```bash
-cd /opt/skystat
+cd /opt/vista
 # If you installed manually, you will need to run:
 #sudo chmod +x uninstall.sh
 ./uninstall.sh
@@ -117,17 +117,17 @@ cd /opt/skystat
 This is only required if you installed the web service
 
 ```bash
-sudo systemctl stop skystatweb.service
-sudo systemctl disable skystatweb.service
-sudo rm /etc/systemd/system/skystatweb.service
+sudo systemctl stop vistaweb.service
+sudo systemctl disable vistaweb.service
+sudo rm /etc/systemd/system/vistaweb.service
 sudo systemctl daemon-reload
 ```
 
 ### Remove the cron jobs
 #### Via command two-liner
 ```bash
-(crontab -l | grep -v -F "@reboot cd $INSTALL_DIR && /usr/bin/python3 $REBOOT_SCRIPT >> ~/skystat.log 2>&1") | crontab -
-(crontab -l | grep -v -F "*/5 * * * * cd $INSTALL_DIR && /usr/bin/python3 $REFRESH_SCRIPT >> ~/skystat.log 2>&1") | crontab -
+(crontab -l | grep -v -F "@reboot cd $INSTALL_DIR && /usr/bin/python3 $REBOOT_SCRIPT >> ~/vista.log 2>&1") | crontab -
+(crontab -l | grep -v -F "*/5 * * * * cd $INSTALL_DIR && /usr/bin/python3 $REFRESH_SCRIPT >> ~/vista.log 2>&1") | crontab -
 ```
 
 #### Manually
@@ -139,15 +139,15 @@ crontab -e
 
 Remove the following
 ```
-@reboot cd /opt/skystat && /usr/bin/python3 boot.py >> ~/skystat.log 2>&1\
-*/5 * * * * cd /opt/skystat && /usr/bin/python main.py >> ~/skystat.log 2>&1"
+@reboot cd /opt/vista && /usr/bin/python3 boot.py >> ~/vista.log 2>&1\
+*/5 * * * * cd /opt/vista && /usr/bin/python main.py >> ~/vista.log 2>&1"
 ```
 
 Save the file
 
 ### Remove the project files
 ```bash
-sudo rm -rf /opt/skystat
+sudo rm -rf /opt/vista
 ```
 
 

@@ -66,18 +66,6 @@ class DisplayManager:
         
         self.draw.text((text_x, y), text, font=font, fill=(0, 0, 0))
 
-
-# Original draw_text() function, just in case
-#    def draw_text(self, text, x, y, fontSize=32, fontPath=None):
-#        logging.debug("Setting default font")
-#        if fontPath is None:
-#            fontPath = self.__location__ + '/font/Asap/Asap-VariableFont_wdth,wght.ttf'
-#        logging.info("Drawing text")
-#        font = ImageFont.truetype(fontPath, size=fontSize)
-#        text_x = x
-#        text_y = y
-#        self.draw.text((text_x, text_y), text, font=font, fill=(0, 0, 0))
-
     def draw_multiline_text(self, text_lines, x, y, fontSize=32, fontPath=None):
         logging.debug("Setting default font")
         if fontPath is None:
@@ -108,7 +96,6 @@ class DisplayManager:
         adjusted_height = int(width * aspect_ratio)
         resized_iamge = image.resize((width, adjusted_height))
         self.image.paste(resized_iamge, (x, y))
-
 
     def clearScreen():
         try:

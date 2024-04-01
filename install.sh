@@ -55,16 +55,16 @@ fi
 
 
 ###################
-# SKYSTAT INSTALL #
+# VISTA INSTALL #
 ###################
 
 # Define paths and names
 SOURCE_DIR="$(dirname "$0")"
-INSTALL_DIR="/opt/skystat"
+INSTALL_DIR="/opt/vista"
 FLASK_APP="web.py"
 REFRESH_SCRIPT="main.py"
 REBOOT_SCRIPT="boot.py"
-SERVICE_NAME="skystatweb"
+SERVICE_NAME="vistaweb"
 PYTHON_PATH="/usr/bin/python3"  # Change this if you're using a virtualenv
 
 # Copy project files to the install directory
@@ -87,7 +87,7 @@ sudo chmod +x $INSTALL_DIR/boot.p $INSTALL_DIR
 echo "Creating systemd service file for the Flask app..."
 cat <<EOF | sudo tee /etc/systemd/system/${SERVICE_NAME}.service > /dev/null
 [Unit]
-Description=Skystat Flask Web Service
+Description=Vista Web Service
 After=network.target
 
 [Service]
@@ -112,7 +112,7 @@ sudo systemctl start ${SERVICE_NAME}.service
 
 # Create a combined cron job for the script
 echo "Creating a cron job for running at startup and every 5 minutes..."
-CRON_JOB="@reboot cd $INSTALL_DIR && $PYTHON_PATH $REBOOT_SCRIPT >> ~/skystat.log 2>&1\n*/5 * * * * cd $INSTALL_DIR && $PYTHON_PATH $REFRESH_SCRIPT >> ~/skystat.log 2>&1"
+CRON_JOB="@reboot cd $INSTALL_DIR && $PYTHON_PATH $REBOOT_SCRIPT >> ~/vista.log 2>&1\n*/5 * * * * cd $INSTALL_DIR && $PYTHON_PATH $REFRESH_SCRIPT >> ~/vista.log 2>&1"
 (crontab -l 2>/dev/null | grep -v -F "$INSTALL_DIR/$REFRESH_SCRIPT"; echo -e "$CRON_JOB") | crontab -
 
 echo "Installation completed."

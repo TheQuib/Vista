@@ -84,8 +84,8 @@ class DrawImage:
 
         logging.info("Begin drawing")
         logging.info("Drawing header")
-        dm.draw_text("SkyStat", 10, 4, 32)
-        dm.draw_text("github.com/TheQuib/SkyStat", 10, 44, 16)
+        dm.draw_text("Vista", 10, 4, 32)
+        dm.draw_text("github.com/TheQuib/Vista", 10, 44, 16)
         dm.draw_text(todays_date, 511, 4, 32, align='right', right_edge=800, right_margin=10)
         dm.draw_text("Last updated " + lastUpdated_dateTime, 0, 43, 16, align='right', right_edge=800, right_margin=10)
         dm.draw_line((0,70), (800, 70), width=3)

@@ -7,8 +7,8 @@ if [ "$(id -u)" == "0" ]; then
 fi
 
 # Define paths and names
-INSTALL_DIR="/opt/skystat"
-SERVICE_NAME="skystatweb"
+INSTALL_DIR="/opt/vista"
+SERVICE_NAME="vistaweb"
 REFRESH_SCRIPT="main.py"
 REBOOT_SCRIPT="boot.py"
 
@@ -27,8 +27,8 @@ sudo systemctl daemon-reload
 
 # Remove the cron jobs
 echo "Removing the cron jobs for $REFRESH_SCRIPT..."
-(crontab -l | grep -v -F "@reboot cd $INSTALL_DIR && /usr/bin/python3 $REBOOT_SCRIPT >> ~/skystat.log 2>&1") | crontab -
-(crontab -l | grep -v -F "*/5 * * * * cd $INSTALL_DIR && /usr/bin/python3 $REFRESH_SCRIPT >> ~/skystat.log 2>&1") | crontab -
+(crontab -l | grep -v -F "@reboot cd $INSTALL_DIR && /usr/bin/python3 $REBOOT_SCRIPT >> ~/vista.log 2>&1") | crontab -
+(crontab -l | grep -v -F "*/5 * * * * cd $INSTALL_DIR && /usr/bin/python3 $REFRESH_SCRIPT >> ~/vista.log 2>&1") | crontab -
 
 # Remove the installed project files
 echo "Removing installed project files from $INSTALL_DIR..."

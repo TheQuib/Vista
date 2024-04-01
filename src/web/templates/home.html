@@ -76,6 +76,13 @@
     color: white;
   }
 
+  img.Vistalogo {
+    max-width : 100px;
+    height: auto;
+    margin: 10px auto;
+    display: block;
+  }
+
   img.Thecabinlogo {
     max-width: 270px; /* Original max-width for larger screens */
     height: auto;
@@ -87,6 +94,10 @@
   @media (max-width: 600px) {
     img.Thecabinlogo {
       max-width: 150px; /* Smaller max-width for smaller screens */
+    }
+
+    img.Vistalogo{
+      max-width: 75px;
     }
 
     .grid-container, .control-sections {
@@ -117,7 +128,7 @@
 <body>
 
 <div class="VistaWeb">
-  <div class="page-title">Vista</div>
+  <img class="Vistalogo" src="{{ url_for('static', filename='assets/vista.png') }}" alt="Vista logo">
   <div class="page-subtitle">github.com/TheQuib/Vista</div>
   
   <div class="grid-container">

@@ -41,13 +41,15 @@ class Webserver:
         def settings():
             return render_template('settings.html')
         
-        @self.app.route('/clear-display', methods=['POST'])
+        @self.app.route('/clear-display', methods=['GET', 'POST'])
         def clear_display_route():
             self.clear_display()
+            return "Display cleared"
 
-        @self.app.route('/refresh-display', methods=['POST'])
+        @self.app.route('/refresh-display', methods=['GET', 'POST'])
         def refresh_display_route():
             self.refresh_display()
+            return "Display refreshed"
             
 
         if self.should_run:

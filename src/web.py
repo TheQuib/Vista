@@ -44,10 +44,12 @@ class Webserver:
         @self.app.route('/clear-display', methods=['POST'])
         def clear_display_route():
             self.clear_display()
+            return "Display cleared"
 
         @self.app.route('/refresh-display', methods=['POST'])
         def refresh_display_route():
             self.refresh_display()
+            return "Display refreshed"
             
 
         if self.should_run:

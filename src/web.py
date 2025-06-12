@@ -5,12 +5,11 @@ import os
 logging.basicConfig(level=logging.DEBUG)
 
 class Webserver:
-    def __init__(self, clear_display, refresh_display):
+    def __init__(self, refresh_display):
         current_directory = os.path.dirname(os.path.abspath(__file__))
         template_dir = os.path.join(current_directory, 'web', 'templates')
         static_dir = os.path.join(current_directory, 'web', 'static')
         self.app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
-        self.clear_display = clear_display
         self.refresh_display = refresh_display
 
         self.should_run = True # Server control loop flag
@@ -37,14 +36,7 @@ class Webserver:
                 request.environ.get('werkzeug.server.shutdown')()          
             return render_template('home.html', regular_total=planTotal, regular_used=planUsed, regular_percentage=planPercentageRemaining, bonus_total=bonusTotal, bonus_used=bonusUsed, bonus_percentage=bonusPercentageRemaining)
 
-        @self.app.route('/settings')
-        def settings():
-            return render_template('settings.html')
-        
-        @self.app.route('/clear-display', methods=['GET', 'POST'])
-        def clear_display_route():
-            self.clear_display()
-            return "Display cleared"
+
 
         @self.app.route('/refresh-display', methods=['GET', 'POST'])
         def refresh_display_route():

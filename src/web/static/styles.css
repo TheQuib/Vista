@@ -43,9 +43,6 @@
   background: linear-gradient(90deg, #6184FF 0%, #2FB4FF 100%);
 }
 
-.Cleardisplay .BtnRefresh {
-  background: linear-gradient(90deg, #2FB4FF 0%, #2FF3FF 100%);
-}
 
 .card-title, .card-content {
   position: absolute;

@@ -2,7 +2,6 @@
 from src.scraper import GetHTML
 from src.displayManager import DisplayManager
 from src.screenControls import ScreenControls
-from src.web import Webserver
 from threading import Thread
 from datetime import datetime
 import random

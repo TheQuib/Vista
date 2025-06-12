@@ -5,6 +5,6 @@ import main
 
 
 
-Server = Webserver(ScreenControls.clearScreen, main.main(debug=True))
+Server = Webserver(ScreenControls.clearScreen, lambda: main.main(debug=True))
 
 Server.start_server(80, 24, 80, 24)

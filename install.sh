@@ -50,7 +50,7 @@ else
     # Add 'dtparam=spi=on' to the end of the file
     echo "Enabling SPI interface..."
     echo "dtparam=spi=on" | sudo tee -a "/boot/config.txt" > /dev/null
-    $REBOOT_REQUIRED="true"
+    REBOOT_REQUIRED="true"
 fi
 
 
@@ -81,7 +81,7 @@ sudo cp $SOURCE_DIR/web.py $INSTALL_DIR
 sudo cp $SOURCE_DIR/uninstall.sh $INSTALL_DIR
 sudo chmod +x $INSTALL_DIR/main.py $INSTALL_DIR
 sudo chmod +x $INSTALL_DIR/uninstall.sh $INSTALL_DIR
-sudo chmod +x $INSTALL_DIR/boot.p $INSTALL_DIR
+sudo chmod +x $INSTALL_DIR/boot.py $INSTALL_DIR
 
 # Create systemd service file for Flask app
 echo "Creating systemd service file for the Flask app..."

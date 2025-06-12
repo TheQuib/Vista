@@ -58,6 +58,12 @@
     border-radius: 5px;
     width: 80%;
     margin: 5px 0 10px;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6184FF 0%, #2FB4FF 100%);
+    border-radius: 5px;
   }
 
   .control-sections {
@@ -137,14 +143,14 @@
   <div class="grid-container">
     <div class="section Regularplan">
       <div class="section-title">Regular Plan</div>
-      <div class="progressbar"></div>
-      <div>20% remaining</div>
+      <div class="progressbar"><div class="progress-fill" style="width: {{ regular_percentage }}%"></div></div>
+      <div>{{ regular_percentage }}% remaining</div>
     </div>
     
     <div class="section Bonusplan">
       <div class="section-title">Bonus Plan</div>
-      <div class="progressbar"></div>
-      <div>20% remaining</div>
+      <div class="progressbar"><div class="progress-fill" style="width: {{ bonus_percentage }}%"></div></div>
+      <div>{{ bonus_percentage }}% remaining</div>
     </div>
     
     <div class="section Timeremaining">
@@ -155,7 +161,7 @@
     
     <div class="section Funfact">
       <div class="section-title">Fun Fact</div>
-      <div>Honey never spoils. Ancient Egyptians ate edible honey thousands of years old.</div>
+      <div>{{ fun_fact|join('<br>') }}</div>
     </div>
   </div>
 

@@ -53,11 +53,15 @@ class GatherValues:
         logging.info("Calculating regular value")
         planRemaining = float(hughesnet_values['planRemaining'])
         planTotal = float(hughesnet_values['planTotal'])
+        self.planRemaining = planRemaining
+        self.planTotal = planTotal
         self.planPercentRemaining = round((planRemaining / planTotal) * 100, 2)
         
         logging.info("Calculating bonus value")
         bonusRemaining = float(hughesnet_values['bonusRemaining'])
         bonusTotal = float(hughesnet_values['bonusTotal'])
+        self.bonusRemaining = bonusRemaining
+        self.bonusTotal = bonusTotal
         self.bonusPercentRemaining = round((bonusRemaining / bonusTotal) * 100, 2)
 
         logging.info("Getting IP Address of device")

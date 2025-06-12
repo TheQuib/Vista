@@ -94,8 +94,8 @@ class DisplayManager:
         image = Image.open(path)
         aspect_ratio = image.height / image.width
         adjusted_height = int(width * aspect_ratio)
-        resized_iamge = image.resize((width, adjusted_height))
-        self.image.paste(resized_iamge, (x, y))
+        resized_image = image.resize((width, adjusted_height))
+        self.image.paste(resized_image, (x, y))
 
     def clearScreen():
         try:

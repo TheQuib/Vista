@@ -4,6 +4,6 @@ import main
 
 
 
-Server = Webserver(lambda: main.main(debug=False))
+Server = Webserver(lambda: main.main(debug=True))
 
 Server.start_server()

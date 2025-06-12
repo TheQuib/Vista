@@ -74,6 +74,8 @@
     border-radius: 10px;
     padding: 10px;
     color: white;
+    border: none;
+    cursor: pointer;
   }
 
   img.Vistalogo {
@@ -158,18 +160,20 @@
   </div>
 
   <div class="control-sections">
-    <div class="control-section Refreshdisplay" id="refreshDisplay-button">
-      <div>Refresh display</div>
-    </div>
+    <button class="control-section Refreshdisplay" id="refreshDisplay-button">
+      Refresh display
+    </button>
 
-    <div class="control-section Cleardisplay" id="clearDisplay-button">
-      <div>Clear display</div>
-    </div>
-    
-    <div class="control-section Settings" id="settings-button">
-      <div>Settings</div>
-    </div>
+    <button class="control-section Cleardisplay" id="clearDisplay-button">
+      Clear display
+    </button>
+
+    <button class="control-section Settings" id="settings-button">
+      Settings
+    </button>
   </div>
+
+  <script src="{{ url_for('static', filename='scripts.js') }}"></script>
   
   <img class="Thecabinlogo" src="{{ url_for('static', filename='assets/theCabin.png') }}" alt="The Cabin Logo">
 </div>
